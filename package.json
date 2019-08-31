@@ -33,6 +33,16 @@
     "sinon": "^7.4.1",
     "xo": "^0.24.0"
   },
+  "keywords": [
+    "data flow",
+    "observable",
+    "reactive",
+    "state container",
+    "state management",
+    "state store",
+    "state",
+    "store"
+  ],
   "xo": {
     "space": true,
     "semicolon": false
