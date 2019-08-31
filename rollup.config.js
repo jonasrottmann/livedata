@@ -2,21 +2,23 @@ import babel from 'rollup-plugin-babel'
 import {terser} from 'rollup-plugin-terser'
 import pkg from './package.json' // eslint-disable-line import/extensions
 
-export default {
-  input: 'index.js',
-  output: [{
-    file: pkg.main,
-    format: 'cjs'
+export default [
+  {
+    input: 'index.js',
+    output: {file: pkg.unpkg, format: 'iife', name: pkg.name.split('/').pop()},
+    plugins: [
+      babel(),
+      terser()
+    ]
   },
   {
-    name: pkg.name.split('/').pop(),
-    file: pkg.browser,
-    format: 'iife'
-  }],
-  plugins: [
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    terser()
-  ]
-}
+    input: 'index.js',
+    output: [
+      {file: pkg.main, format: 'umd', name: pkg.name.split('/').pop()},
+      {file: pkg.module, format: 'esm'}
+    ],
+    plugins: [
+      babel()
+    ]
+  }
+]

@@ -1,10 +1,10 @@
 {
   "name": "@jonasrottmann/livedata",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Simple, zero dependency, observable value container.",
   "main": "dist/livedata.js",
-  "browser": "dist/livedata-browser.js",
-  "unpkg": "dist/livedata-browser.js",
+  "module": "dist/livedata-module.js",
+  "unpkg": "dist/livedata.min.js",
   "files": [
     "dist"
   ],

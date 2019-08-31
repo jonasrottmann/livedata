@@ -1,4 +1,4 @@
-export default function (initialValue, onActive, onInactive) {
+export default function livedata(initialValue, onActive, onInactive) {
   let value = initialValue
   let observers = []
 
