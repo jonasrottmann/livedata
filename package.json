@@ -6,13 +6,15 @@
   "module": "dist/livedata-module.js",
   "unpkg": "dist/livedata.min.js",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "scripts": {
     "build": "rollup -c",
     "clean": "rm -rf dist/",
-    "test": "npm run build && ava && xo"
+    "test": "tsd && npm run build && ava && xo"
   },
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonasrottmann/livedata.git"
@@ -31,6 +33,7 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-terser": "^5.1.1",
     "sinon": "^7.4.1",
+    "tsd": "^0.7.4",
     "xo": "^0.24.0"
   },
   "keywords": [
@@ -45,6 +48,13 @@
   ],
   "xo": {
     "space": true,
-    "semicolon": false
+    "semicolon": false,
+    "envs": [
+      "browser"
+    ],
+    "ignores": [
+      "*.d.ts",
+      "*.test-d.ts"
+    ]
   }
 }
