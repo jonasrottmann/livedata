@@ -1,6 +1,6 @@
 import test from 'ava'
 import sinon from 'sinon'
-import LiveData from './dist/livedata'
+import LiveData from '.'
 
 test('get', t => {
   // Given

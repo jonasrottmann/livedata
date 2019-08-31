@@ -7,7 +7,9 @@ export default [
     input: 'index.js',
     output: {file: pkg.unpkg, format: 'iife', name: pkg.name.split('/').pop()},
     plugins: [
-      babel(),
+      babel({
+        presets: [['@babel/preset-env', {targets: {browsers: 'defaults'}}]]
+      }),
       terser()
     ]
   },

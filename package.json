@@ -10,9 +10,11 @@
     "index.d.ts"
   ],
   "scripts": {
-    "build": "rollup -c",
     "clean": "rm -rf dist/",
-    "test": "tsd && npm run build && ava && xo"
+    "prebuild": "npm run clean",
+    "build": "rollup -c",
+    "pretest": "npm run build",
+    "test": "tsd && ava && xo"
   },
   "types": "index.d.ts",
   "repository": {
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "ava": "^2.3.0",
     "rollup": "^1.20.3",
     "rollup-plugin-babel": "^4.3.3",
