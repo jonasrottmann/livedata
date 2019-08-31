@@ -1,0 +1,40 @@
+{
+  "name": "@jonasrottmann/livedata",
+  "version": "0.0.1",
+  "description": "Simple, zero dependency, observable value container.",
+  "main": "dist/livedata.js",
+  "browser": "dist/livedata-browser.js",
+  "unpkg": "dist/livedata-browser.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "clean": "rm -rf dist/",
+    "test": "npm run build && ava && xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonasrottmann/livedata.git"
+  },
+  "author": "Jonas Rottmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonasrottmann/livedata/issues"
+  },
+  "homepage": "https://github.com/jonasrottmann/livedata#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "ava": "^2.3.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-terser": "^5.1.1",
+    "sinon": "^7.4.1",
+    "xo": "^0.24.0"
+  },
+  "xo": {
+    "space": true,
+    "semicolon": false
+  }
+}
