@@ -91,3 +91,49 @@ test('given a mapped livedata when it is subscribed to then original one should 
   t.true(mappedObserver.calledOnce)
   t.true(originalOnInactive.calledOnce)
 })
+
+test('given a trigger livedata when switched then the result livedata should be used', t => {
+  // Given
+  const trigger = new L(true)
+  const switchA = new L('yes')
+  const switchB = new L('no')
+
+  // When
+  const switched = trigger.switchMap(v => {
+    return v === true ? switchA : switchB
+  })
+
+  // Then
+  console.log('1. assertion')
+  t.is(switched.get(), 'yes')
+})
+
+test('given a switched livedata when subscribed to it and ubsubscribed from it then onActive/onInactive on the result should be called', t => {
+  const switchedObserver = sinon.spy()
+  const spiesA = {
+    onActive: sinon.spy(),
+    onInactive: sinon.spy()
+  }
+  const spiesB = {
+    onActive: sinon.spy(),
+    onInactive: sinon.spy()
+  }
+
+  // Given
+  const trigger = new L(true)
+  const switchA = new L('yes', spiesA.onActive, spiesA.onInactive)
+  const switchB = new L('no', spiesB.onActive, spiesB.onInactive)
+  const switched = trigger.switchMap(v => {
+    return v === true ? switchA : switchB
+  })
+
+  // When
+  const unsub = switched.subscribe(switchedObserver)
+  unsub()
+
+  // Then
+  t.true(spiesA.onActive.calledOnce)
+  t.true(spiesA.onInactive.calledOnce)
+  t.true(spiesB.onActive.notCalled)
+  t.true(spiesB.onInactive.notCalled)
+})

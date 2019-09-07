@@ -11,6 +11,23 @@ export default function livedata(initialValue, onActive, onInactive) {
     return value
   }
 
+  function subscribe(observer) {
+    // Subscribed
+    observers.push(observer)
+
+    // Trigger onActive if first one subscribed
+    onActive && observers.length === 1 && onActive() // eslint-disable-line no-unused-expressions
+
+    // Immediatly notify of current value
+    observer(value)
+
+    // Unsubscribe
+    return function () {
+      observers = observers.filter(o => o !== observer)
+      onInactive && observers.length === 0 && onInactive() // eslint-disable-line no-unused-expressions
+    }
+  }
+
   function map(transformer) {
     let unsubscribe
     const mapped = livedata(
@@ -29,21 +46,29 @@ export default function livedata(initialValue, onActive, onInactive) {
     return mapped
   }
 
-  function subscribe(observer) {
-    // Subscribed
-    observers.push(observer)
+  function switchMap(transformer) {
+    let unsubscribe
+    let currentResult
+    let resultUnsubscribe = () => {}
+    const switched = livedata(
+      transformer(value).get(),
+      () => {
+        unsubscribe = subscribe(v => {
+          const newResult = transformer(v)
+          if (currentResult !== newResult) {
+            resultUnsubscribe()
+            currentResult = newResult
+            resultUnsubscribe = newResult.subscribe(v => switched.set(v))
+          }
+        })
+      },
+      () => {
+        resultUnsubscribe()
+        unsubscribe()
+      }
+    )
 
-    // Trigger onActive if first one subscribed
-    onActive && observers.length === 1 && onActive() // eslint-disable-line no-unused-expressions
-
-    // Immediatly notify of current value
-    observer(value)
-
-    // Unsubscribe
-    return function () {
-      observers = observers.filter(o => o !== observer)
-      onInactive && observers.length === 0 && onInactive() // eslint-disable-line no-unused-expressions
-    }
+    return switched
   }
 
   return {
@@ -51,6 +76,7 @@ export default function livedata(initialValue, onActive, onInactive) {
     set: value => transition(() => value),
     subscribe,
     transition,
-    map
+    map,
+    switchMap
   }
 }

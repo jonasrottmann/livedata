@@ -14,7 +14,10 @@
     "prebuild": "npm run clean",
     "build": "rollup -c",
     "pretest": "npm run build",
-    "test": "tsd && ava && xo"
+    "test": "run-p test-*",
+    "test-unit": "ava --serial",
+    "test-lint": "xo",
+    "test-typings": "tsd"
   },
   "types": "index.d.ts",
   "repository": {
@@ -32,6 +35,7 @@
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "ava": "^2.3.0",
+    "npm-run-all": "^4.1.5",
     "rollup": "^1.20.3",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-terser": "^5.1.1",

@@ -35,4 +35,12 @@ export default class livedata<T> {
      * @returns A new livedata.
      */
     map<S>(transformer: (value: T) => S): livedata<S>;
+
+    /**
+     * Builds a new livedata whose value is backed by whatever livedata the transformer returns.
+     * 
+     * @param transformer A mapping for switching to another livedata depending on the value of the trigger.
+     * @returns A new livedata.
+     */
+    switchMap<S>(transformer: (value: T) => livedata<S>) : livedata<S>;
 }
