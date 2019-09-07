@@ -16,8 +16,8 @@ export default [
   {
     input: 'index.js',
     output: [
-      {file: pkg.main, format: 'umd', name: pkg.name.split('/').pop()},
-      {file: pkg.module, format: 'esm'}
+      {file: pkg.main, format: 'umd', name: pkg.name.split('/').pop(), sourcemap: true},
+      {file: pkg.module, format: 'esm', sourcemap: true}
     ],
     plugins: [
       babel()
