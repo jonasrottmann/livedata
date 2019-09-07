@@ -1,10 +1,10 @@
 import test from 'ava'
 import sinon from 'sinon'
-import LiveData from '.'
+import L from '.'
 
 test('get', t => {
   // Given
-  const ld = new LiveData(true)
+  const ld = new L(true)
 
   // Then
   t.true(ld.get())
@@ -12,7 +12,7 @@ test('get', t => {
 
 test('set', t => {
   // Given
-  const ld = new LiveData(true)
+  const ld = new L(true)
 
   // When
   ld.set(false)
@@ -23,7 +23,7 @@ test('set', t => {
 
 test('transition', t => {
   // Given
-  const ld = new LiveData(true)
+  const ld = new L(true)
 
   // When
   ld.transition(state => !state)
@@ -37,7 +37,7 @@ test('given an onActive callback when multiple subscriber onActive will only be 
   const sub = sinon.spy()
 
   // Given
-  const ld = new LiveData(true, onActive)
+  const ld = new L(true, onActive)
 
   // When
   ld.subscribe(sub)
@@ -48,4 +48,34 @@ test('given an onActive callback when multiple subscriber onActive will only be 
   t.is(onActive.callCount, 1)
   t.true(sub.calledThrice)
   t.true(onActive.calledBefore(sub))
+})
+
+test('given a livedata when it is used with map then a new livedata will be returned with the mapped value', t => {
+  // Given
+  const original = new L(true)
+
+  // When
+  const mapped = original.map(v => v === true ? 'yes' : 'no')
+
+  // Then
+  t.is(mapped.get(), 'yes')
+})
+
+test('given a mapped livedata when it is subscribed to then original one should stay active', t => {
+  const originalOnActive = sinon.spy()
+  const originalOnInactive = sinon.spy()
+  const mappedObserver = sinon.spy()
+
+  // Given
+  const original = new L(true, originalOnActive, originalOnInactive)
+  const mapped = original.map(v => v)
+
+  // When
+  const unsubMapped = mapped.subscribe(mappedObserver)
+  unsubMapped()
+
+  // Then
+  t.true(originalOnActive.calledOnce)
+  t.true(mappedObserver.calledOnce)
+  t.true(originalOnInactive.calledOnce)
 })

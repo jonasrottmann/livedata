@@ -11,6 +11,24 @@ export default function livedata(initialValue, onActive, onInactive) {
     return value
   }
 
+  function map(transformer) {
+    let unsubscribe
+    const mapped = livedata(
+      transformer(value), // Initial value is mapped from original current value
+      () => {
+        // When becoming active add to subscribers of original livedata
+        unsubscribe = subscribe(v => {
+          mapped.set(transformer(v))
+        })
+      },
+      () => {
+        // When becoming inactive remove from subscribers of original livedata
+        unsubscribe()
+      })
+
+    return mapped
+  }
+
   function subscribe(observer) {
     // Subscribed
     observers.push(observer)
@@ -32,6 +50,7 @@ export default function livedata(initialValue, onActive, onInactive) {
     get: () => value,
     set: value => transition(() => value),
     subscribe,
-    transition
+    transition,
+    map
   }
 }
