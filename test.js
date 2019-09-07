@@ -61,6 +61,18 @@ test('given a livedata when it is used with map then a new livedata will be retu
   t.is(mapped.get(), 'yes')
 })
 
+test('given a mapped livedata when it is not active changes to the source will not be picked up', t => {
+  // Given
+  const original = new L(true)
+
+  // When
+  const mapped = original.map(v => v === true ? 'yes' : 'no')
+  original.set('false') // ⚠️ This will not be picked up by the mapped one since it's not active
+
+  // Then
+  t.is(mapped.get(), 'yes')
+})
+
 test('given a mapped livedata when it is subscribed to then original one should stay active', t => {
   const originalOnActive = sinon.spy()
   const originalOnInactive = sinon.spy()
