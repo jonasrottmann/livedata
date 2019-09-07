@@ -137,3 +137,24 @@ test('given a switched livedata when subscribed to it and ubsubscribed from it t
   t.true(spiesB.onActive.notCalled)
   t.true(spiesB.onInactive.notCalled)
 })
+
+test('given a switched livedata when the transformation returns the same result ignore the switch', t => {
+  const switchedObserver = sinon.spy()
+  const resultOnActive = sinon.spy()
+  const resultOnInactive = sinon.spy()
+
+  // Given
+  const trigger = new L(true)
+  const result = new L('yes', resultOnActive, resultOnInactive)
+  const switched = trigger.switchMap(() => result) // ⚠️ Always return same result livedata
+
+  // When
+  const unsubscribe = switched.subscribe(switchedObserver)
+  trigger.set(false)
+  unsubscribe()
+
+  // Then
+  t.true(switchedObserver.calledOnce)
+  t.true(resultOnActive.calledOnce)
+  t.true(resultOnInactive.calledOnce)
+})
