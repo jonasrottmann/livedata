@@ -7,6 +7,10 @@ export default class livedata<T> {
     constructor(initialValue?: T, onActive?: () => void, onInactive?: () => void);
 
     /**
+     * Access the current value of this livedata.
+     * 
+     * ⚠️ Derived livedatas (created by `map` or `switchMap`) will not pick up values from the source livedata if not active.
+     * 
      * @returns The current value.
      */
     get(): T;
@@ -29,7 +33,7 @@ export default class livedata<T> {
     subscribe(observer: (newValue: T, oldValue?: T) => void) : () => void;
 
     /**
-     * Builds a new livedata whose value gets updated whenever the source changes.
+     * Builds a new livedata whose value gets updated (during it's active) whenever the source changes.
      * 
      * @param transformer A mapping to apply to values of the source.
      * @returns A new livedata.
@@ -37,7 +41,7 @@ export default class livedata<T> {
     map<S>(transformer: (value: T) => S): livedata<S>;
 
     /**
-     * Builds a new livedata whose value is backed by whatever livedata the transformer returns.
+     * Builds a new livedata whose value gets updated (during it's active) whenever the tigger changes or the livedata result of the transformation updates.
      * 
      * @param transformer A mapping for switching to another livedata depending on the value of the trigger.
      * @returns A new livedata.
