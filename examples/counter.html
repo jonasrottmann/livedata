@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <title>Counter example</title>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/@jonasrottmann/livedata"></script>
+    <script>
+        const counter = new LiveData(0)
+
+        window.onload = () => {
+            counter.subscribe((v, o) => {
+                console.log(`Counter value changed from ${o} to ${v}!`)
+                
+                document.querySelector('#value').textContent = v
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="counter.transition(value => value > 0 ? value - 1 : 0)">-</button>
+    <span id="value">0</span>
+    <button onclick="counter.transition(value => value + 1)">+</button>
+    <button onclick="counter.set(0)">reset</button>
+</body>
+
+</html>
