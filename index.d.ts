@@ -1,4 +1,4 @@
-export default class livedata<T> {
+export default class LiveData<T> {
     /**
      * @param initialValue 
      * @param onActive A handler which is called whenever the number of observers changes from 0 to 1.
@@ -7,9 +7,9 @@ export default class livedata<T> {
     constructor(initialValue?: T, onActive?: () => void, onInactive?: () => void);
 
     /**
-     * Access the current value of this livedata.
+     * Access the current value of this LiveData.
      * 
-     * ⚠️ Derived livedatas (created by `map` or `switchMap`) will not pick up values from the source livedata if not active.
+     * ⚠️ Derived LiveDatas (created by `map` or `switchMap`) will not pick up values from the source LiveData if not active.
      * 
      * @returns The current value.
      */
@@ -33,18 +33,18 @@ export default class livedata<T> {
     subscribe(observer: (newValue: T, oldValue?: T) => void) : () => void;
 
     /**
-     * Builds a new livedata whose value gets updated (during it's active) whenever the source changes.
+     * Builds a new LiveData whose value gets updated (during it's active) whenever the source changes.
      * 
      * @param transformer A mapping to apply to values of the source.
-     * @returns A new livedata.
+     * @returns A new LiveData.
      */
-    map<S>(transformer: (value: T) => S): livedata<S>;
+    map<S>(transformer: (value: T) => S): LiveData<S>;
 
     /**
-     * Builds a new livedata whose value gets updated (during it's active) whenever the tigger changes or the livedata result of the transformation updates.
+     * Builds a new LiveData whose value gets updated (during it's active) whenever the tigger changes or the LiveData result of the transformation updates.
      * 
-     * @param transformer A mapping for switching to another livedata depending on the value of the trigger.
-     * @returns A new livedata.
+     * @param transformer A mapping for switching to another LiveData depending on the value of the trigger.
+     * @returns A new LiveData.
      */
-    switchMap<S>(transformer: (value: T) => livedata<S>) : livedata<S>;
+    switchMap<S>(transformer: (value: T) => LiveData<S>) : LiveData<S>;
 }
