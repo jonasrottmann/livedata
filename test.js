@@ -2,7 +2,7 @@ import test from 'ava'
 import sinon from 'sinon'
 import L from '.'
 
-test('get', t => {
+test('given a livedata with initial value then get will return it', t => {
   // Given
   const ld = new L(true)
 
@@ -10,7 +10,7 @@ test('get', t => {
   t.true(ld.get())
 })
 
-test('set', t => {
+test('given a livedata when setting another value get will return it', t => {
   // Given
   const ld = new L(true)
 
@@ -21,7 +21,7 @@ test('set', t => {
   t.false(ld.get())
 })
 
-test('transition', t => {
+test('given a livedata when transitioning to another value get will return it', t => {
   // Given
   const ld = new L(true)
 
