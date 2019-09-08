@@ -1,6 +1,10 @@
 # `LiveData`
 
-✨ Simple, zero dependency, observable value container.
+<div align="center">
+    <img src="https://img.shields.io/npm/v/@jonasrottmann/livedata">
+    <img src="https://img.shields.io/bundlephobia/minzip/@jonasrottmann/livedata">
+    <p>✨ Simple, zero dependency, observable value container. ✨</p>
+</div>
 
 `LiveData` is a very small observable value container targeted at small apps. The goal ist to make observing app state as easy as possible.
 
