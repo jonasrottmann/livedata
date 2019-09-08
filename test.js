@@ -136,7 +136,6 @@ test('given a trigger LiveData when switched then the result LiveData should be 
   })
 
   // Then
-  console.log('1. assertion')
   t.is(switched.get(), 'yes')
 })
 
