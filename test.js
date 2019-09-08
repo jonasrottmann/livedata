@@ -32,6 +32,38 @@ test('transition', t => {
   t.false(ld.get())
 })
 
+test('given a livedata when subscribed to the observer is immediatly called with the initial value', t => {
+  const spy = sinon.spy()
+
+  // Given
+  const ld = new L(true)
+
+  // When
+  ld.subscribe((newValue, oldValue) => {
+    spy(newValue, oldValue)
+  })
+
+  // Then
+  t.true(spy.calledOnceWith(true))
+})
+
+test('given a livedata subscription when changing the value the observer ist called with the new and old value', t => {
+  const spy = sinon.spy()
+
+  // Given
+  const ld = new L(true)
+  ld.subscribe((newValue, oldValue) => {
+    spy(newValue, oldValue)
+  })
+  spy.resetHistory() // Ignore the invokation when subscription happend
+
+  // When
+  ld.set(false)
+
+  // Then
+  t.true(spy.calledOnceWith(false, true))
+})
+
 test('given an onActive callback when multiple subscriber onActive will only be invoked once', t => {
   const onActive = sinon.spy()
   const sub = sinon.spy()
