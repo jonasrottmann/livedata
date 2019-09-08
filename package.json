@@ -1,6 +1,6 @@
 {
   "name": "@jonasrottmann/livedata",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "✨Simple, zero dependency, observable value container.",
   "main": "dist/livedata.js",
   "module": "dist/livedata-module.js",
@@ -39,6 +39,7 @@
     "nyc": "^14.1.1",
     "rollup": "^1.20.3",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-cleanup": "^3.1.1",
     "rollup-plugin-terser": "^5.1.1",
     "sinon": "^7.4.1",
     "tsd": "^0.7.4",
