@@ -2,7 +2,7 @@ import test from 'ava'
 import sinon from 'sinon'
 import L from '.'
 
-test('given a livedata with initial value then get will return it', t => {
+test('given a LiveData with initial value then get will return it', t => {
   // Given
   const ld = new L(true)
 
@@ -10,7 +10,7 @@ test('given a livedata with initial value then get will return it', t => {
   t.true(ld.get())
 })
 
-test('given a livedata when setting another value get will return it', t => {
+test('given a LiveData when setting another value get will return it', t => {
   // Given
   const ld = new L(true)
 
@@ -21,7 +21,7 @@ test('given a livedata when setting another value get will return it', t => {
   t.false(ld.get())
 })
 
-test('given a livedata when transitioning to another value get will return it', t => {
+test('given a LiveData when transitioning to another value get will return it', t => {
   // Given
   const ld = new L(true)
 
@@ -32,7 +32,7 @@ test('given a livedata when transitioning to another value get will return it', 
   t.false(ld.get())
 })
 
-test('given a livedata when subscribed to the observer is immediatly called with the initial value', t => {
+test('given a LiveData when subscribed to the observer is immediatly called with the initial value', t => {
   const spy = sinon.spy()
 
   // Given
@@ -47,7 +47,7 @@ test('given a livedata when subscribed to the observer is immediatly called with
   t.true(spy.calledOnceWith(true))
 })
 
-test('given a livedata subscription when changing the value the observer ist called with the new and old value', t => {
+test('given a LiveData subscription when changing the value the observer ist called with the new and old value', t => {
   const spy = sinon.spy()
 
   // Given
@@ -82,7 +82,7 @@ test('given an onActive callback when multiple subscriber onActive will only be 
   t.true(onActive.calledBefore(sub))
 })
 
-test('given a livedata when it is used with map then a new livedata will be returned with the mapped value', t => {
+test('given a LiveData when it is used with map then a new LiveData will be returned with the mapped value', t => {
   // Given
   const original = new L(true)
 
@@ -93,7 +93,7 @@ test('given a livedata when it is used with map then a new livedata will be retu
   t.is(mapped.get(), 'yes')
 })
 
-test('given a mapped livedata when it is not active changes to the source will not be picked up', t => {
+test('given a mapped LiveData when it is not active changes to the source will not be picked up', t => {
   // Given
   const original = new L(true)
 
@@ -105,7 +105,7 @@ test('given a mapped livedata when it is not active changes to the source will n
   t.is(mapped.get(), 'yes')
 })
 
-test('given a mapped livedata when it is subscribed to then original one should stay active', t => {
+test('given a mapped LiveData when it is subscribed to then original one should stay active', t => {
   const originalOnActive = sinon.spy()
   const originalOnInactive = sinon.spy()
   const mappedObserver = sinon.spy()
@@ -124,7 +124,7 @@ test('given a mapped livedata when it is subscribed to then original one should 
   t.true(originalOnInactive.calledOnce)
 })
 
-test('given a trigger livedata when switched then the result livedata should be used', t => {
+test('given a trigger LiveData when switched then the result LiveData should be used', t => {
   // Given
   const trigger = new L(true)
   const switchA = new L('yes')
@@ -140,7 +140,7 @@ test('given a trigger livedata when switched then the result livedata should be 
   t.is(switched.get(), 'yes')
 })
 
-test('given a switched livedata when subscribed to it and ubsubscribed from it then onActive/onInactive on the result should be called', t => {
+test('given a switched LiveData when subscribed to it and ubsubscribed from it then onActive/onInactive on the result should be called', t => {
   const switchedObserver = sinon.spy()
   const spiesA = {
     onActive: sinon.spy(),
@@ -170,7 +170,7 @@ test('given a switched livedata when subscribed to it and ubsubscribed from it t
   t.true(spiesB.onInactive.notCalled)
 })
 
-test('given a switched livedata when the transformation returns the same result ignore the switch', t => {
+test('given a switched LiveData when the transformation returns the same result ignore the switch', t => {
   const switchedObserver = sinon.spy()
   const resultOnActive = sinon.spy()
   const resultOnInactive = sinon.spy()
@@ -178,7 +178,7 @@ test('given a switched livedata when the transformation returns the same result 
   // Given
   const trigger = new L(true)
   const result = new L('yes', resultOnActive, resultOnInactive)
-  const switched = trigger.switchMap(() => result) // ⚠️ Always return same result livedata
+  const switched = trigger.switchMap(() => result) // ⚠️ Always return same result LiveData
 
   // When
   const unsubscribe = switched.subscribe(switchedObserver)
