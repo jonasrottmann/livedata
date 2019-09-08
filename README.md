@@ -25,7 +25,7 @@ Use directly with [unpkg](https://unpkg.com/) as a minified [IIFE](https://devel
 </script>
 ```
 
-Use directly with [unpkg](https://unpkg.com/) as a module:
+Use directly with [unpkg](https://unpkg.com/) as a [module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules):
 
 ```html
 <script type=module>
