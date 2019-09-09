@@ -42,7 +42,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 
 ## Usage
 
-**For a simple counter example check out [counter.html](examples/counter.html)**.
+**For a simple counter example check out [counter.html](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.
 
 > 🚧 This documentation is work in prograss...
 
