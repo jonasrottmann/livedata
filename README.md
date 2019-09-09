@@ -1,8 +1,8 @@
 # `LiveData`
 
 <div align="center">
-    <img src="https://img.shields.io/npm/v/@jonasrottmann/livedata">
-    <img src="https://img.shields.io/bundlephobia/minzip/@jonasrottmann/livedata">
+    <a href="https://www.npmjs.com/package/@jonasrottmann/livedata"><img alt="npm (scoped)" src="https://img.shields.io/npm/v/@jonasrottmann/livedata"></a>
+    <a href="https://bundlephobia.com/result?p=@jonasrottmann/livedata"><img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/minzip/@jonasrottmann/livedata"></a>
     <p>✨ Simple, zero dependency, observable value container. ✨</p>
 </div>
 
