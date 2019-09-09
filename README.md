@@ -79,14 +79,14 @@ unsubscribe()
 
 ```javascript
 const source = new LiveData(true)
-const mapped = source.map(v => v ? 'yes' : 'no')
+const mapped = source.map(v => v ? '✅' : '🛑')
 
 mapped.subsribe(v => console.log(v))
 
 source.set(false)
 ```
 
-Will print 'yes' followed by 'no'.
+Will print `✅` followed by `🛑`.
 
 #### `switchMap`
 
@@ -94,13 +94,15 @@ Will print 'yes' followed by 'no'.
 
 ```javascript
 const trigger = new LiveData(true)
-const switchA = new LiveData('yes')
-const switchB = new LiveData('no')
+const switchA = new LiveData('🅰️')
+const switchB = new LiveData('🅱️')
 
 const switched = trigger.switchMap(v => v ? switchA : switchB)
 
-...
+switched.subscribe(v => console.log(v))
 ```
+
+`switched` will now emit the values emitted by `switchA` if `trigger` contains `true` and the values emitted by `switchB` if `trigger` contains `false`.
 
 ## License
 
