@@ -18,7 +18,7 @@ npm install @jonasrottmann/livedata
 yarn add @jonasrottmann/livedata
 ```
 
-Use directly with [unpkg](https://unpkg.com/) as a minified [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE):
+Use directly with [unpkg](https://unpkg.com/) as a **minified [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)**:
 
 ```html
 <script src="https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata.min.js" charset="utf-8"></script>
@@ -29,7 +29,7 @@ Use directly with [unpkg](https://unpkg.com/) as a minified [IIFE](https://devel
 </script>
 ```
 
-Use directly with [unpkg](https://unpkg.com/) as a [module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules):
+Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)**:
 
 ```html
 <script type=module>
@@ -42,7 +42,7 @@ Use directly with [unpkg](https://unpkg.com/) as a [module](https://developer.mo
 
 ## Usage
 
-For a simple counter example check out [counter.html](examples/counter.html).
+**For a simple counter example check out [counter.html](examples/counter.html)**.
 
 > 🚧 This documentation is work in prograss...
 
@@ -69,9 +69,9 @@ unsubscribe()
 
 ### Transformations
 
-`map` and `switchMap` allow to derive a `LiveData` from an existing `LiveData`.
+`map` and `switchMap` allow to derive a new `LiveData` from an existing `LiveData`.
 
-> ⚠️ In both cases the derived `LiveData` must be active (have at least one observer) to pick up changes from the source `LiveData`.
+> ⚠️ In both cases the derived `LiveData` must be active (have at least one observer) to pick up changes from the source.
 
 #### `map`
 
