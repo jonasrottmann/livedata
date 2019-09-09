@@ -1,6 +1,10 @@
 # `LiveData`
 
-✨ Simple, zero dependency, observable value container.
+<div align="center">
+    <img src="https://img.shields.io/npm/v/@jonasrottmann/livedata">
+    <img src="https://img.shields.io/bundlephobia/minzip/@jonasrottmann/livedata">
+    <p>✨ Simple, zero dependency, observable value container. ✨</p>
+</div>
 
 `LiveData` is a very small observable value container targeted at small apps. The goal ist to make observing app state as easy as possible.
 
@@ -61,6 +65,41 @@ livedata.set(true)
 
 // End the subscription
 unsubscribe()
+```
+
+### Transformations
+
+`map` and `switchMap` allow to derive a `LiveData` from an existing `LiveData`.
+
+> ⚠️ In both cases the derived `LiveData` must be active (have at least one observer) to pick up changes from the source `LiveData`.
+
+#### `map`
+
+`map` is used to apply the given transformer function to each value emitted by the source `LiveData` and returns a new `LiveData` which emits those resulting values.
+
+```javascript
+const source = new LiveData(true)
+const mapped = source.map(v => v ? 'yes' : 'no')
+
+mapped.subsribe(v => console.log(v))
+
+source.set(false)
+```
+
+Will print 'yes' followed by 'no'.
+
+#### `switchMap`
+
+`switchMap` is used to react to changes to the trigger `LiveData` and returns a new `LiveData` which emits values from whatever `LiveData` the transfomer function returns.
+
+```javascript
+const trigger = new LiveData(true)
+const switchA = new LiveData('yes')
+const switchB = new LiveData('no')
+
+const switched = trigger.switchMap(v => v ? switchA : switchB)
+
+...
 ```
 
 ## License

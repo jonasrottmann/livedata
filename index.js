@@ -28,10 +28,55 @@ export default function LiveData(initialValue, onActive, onInactive) {
     }
   }
 
+  function map(transformer) {
+    let unsubscribe
+    const mapped = new LiveData(
+      transformer(value), // Initial value is mapped from original current value
+      () => {
+        // When becoming active add to subscribers of original LiveData
+        unsubscribe = subscribe(v => {
+          mapped.set(transformer(v))
+        })
+      },
+      () => {
+        // When becoming inactive remove from subscribers of original LiveData
+        unsubscribe()
+      })
+
+    return mapped
+  }
+
+  function switchMap(transformer) {
+    let unsubscribe
+    let currentResult
+    let resultUnsubscribe = () => {}
+    const switched = new LiveData(
+      transformer(value).get(),
+      () => {
+        unsubscribe = subscribe(v => {
+          const newResult = transformer(v)
+          if (currentResult !== newResult) {
+            resultUnsubscribe()
+            currentResult = newResult
+            resultUnsubscribe = newResult.subscribe(v => switched.set(v))
+          }
+        })
+      },
+      () => {
+        resultUnsubscribe()
+        unsubscribe()
+      }
+    )
+
+    return switched
+  }
+
   return {
     get: () => value,
     set: value => transition(() => value),
     subscribe,
-    transition
+    transition,
+    map,
+    switchMap
   }
 }
