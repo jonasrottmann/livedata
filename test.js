@@ -1,6 +1,6 @@
 import test from 'ava'
 import sinon from 'sinon'
-import L from '.'
+import {LiveData as L, MediatorLiveData as M} from '.'
 
 test('given a LiveData with initial value then get will return it', t => {
   // Given
@@ -188,4 +188,23 @@ test('given a switched LiveData when the transformation returns the same result 
   t.true(switchedObserver.calledOnce)
   t.true(resultOnActive.calledOnce)
   t.true(resultOnInactive.calledOnce)
+})
+
+test('TODO: Test MediatorLiveData', t => {
+  const liveData = new L(0)
+  const mediatorLiveData = new M()
+
+  mediatorLiveData.addSource(liveData, value => {
+    console.log('Source changed')
+    mediatorLiveData.set(value)
+  })
+  mediatorLiveData.subscribe(value => {
+    console.log('Mediator changed')
+    console.log(value)
+  })
+
+  liveData.set(1)
+  liveData.set(2)
+
+  t.true(true)
 })

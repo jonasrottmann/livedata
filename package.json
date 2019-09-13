@@ -13,8 +13,8 @@
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup -c",
-    "pretest": "npm run build",
     "test": "run-p test-*",
+    "pretest-unit": "npm run build",
     "test-unit": "nyc ava --serial",
     "test-lint": "xo",
     "test-typings": "tsd"

@@ -6,7 +6,7 @@ import pkg from './package.json' // eslint-disable-line import/extensions
 export default [
   {
     input: 'index.js',
-    output: {file: pkg.unpkg, format: 'iife', name: 'LiveData'},
+    output: {file: pkg.unpkg, format: 'iife', name: 'livedata'},
     plugins: [
       babel({
         presets: [['@babel/preset-env', {targets: {browsers: 'defaults'}}]]
@@ -17,7 +17,7 @@ export default [
   {
     input: 'index.js',
     output: [
-      {file: pkg.main, format: 'umd', name: 'LiveData', sourcemap: true},
+      {file: pkg.main, format: 'umd', name: 'livedata', sourcemap: true},
       {file: pkg.module, format: 'esm', sourcemap: true}
     ],
     plugins: [

@@ -1,4 +1,4 @@
-export default function LiveData(initialValue, onActive, onInactive) {
+function LiveData(initialValue, onActive, onInactive) {
   let value = initialValue
   let observers = []
 
@@ -79,4 +79,40 @@ export default function LiveData(initialValue, onActive, onInactive) {
     map,
     switchMap
   }
+}
+
+function MediatorLiveData(initialValue) {
+  const sources = new Map()
+
+  const ld = new LiveData(initialValue, () => {
+    // OnActive
+    sources.forEach((value, key, map) => {
+      const unsub = key.subscribe(value.onChange)
+      value.unsub = unsub
+      map.set(key, value)
+    })
+  }, () => {
+    // OnInactive
+    sources.forEach(value => {
+      value.ubsub()
+    })
+  })
+
+  function addSource(source, onChange) {
+    sources.set(source, {onChange})
+
+    return function () {
+      sources.get(source).unsub()
+      sources.delete(source)
+    }
+  }
+
+  return {
+    ...ld,
+    addSource
+  }
+}
+
+export {
+  LiveData, MediatorLiveData
 }
