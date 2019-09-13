@@ -32,6 +32,19 @@ test('given a LiveData when transitioning to another value get will return it', 
   t.false(ld.get())
 })
 
+test('given a LiveData when no initialValue supplied then the first subscribe will not trigger the observer', t => {
+  const spy = sinon.spy()
+
+  // Given
+  const ld = new L()
+
+  // When
+  ld.subscribe(value => spy(value))
+
+  // Then
+  t.true(spy.notCalled)
+})
+
 test('given a LiveData when subscribed to the observer is immediatly called with the initial value', t => {
   const spy = sinon.spy()
 
@@ -190,21 +203,18 @@ test('given a switched LiveData when the transformation returns the same result 
   t.true(resultOnInactive.calledOnce)
 })
 
-test('TODO: Test MediatorLiveData', t => {
-  const liveData = new L(0)
+test('given a MediatorLiveData when adding a source then the subscription will be called', t => {
+  const spy = sinon.spy()
+
+  // Given
+  const liveData = new L(true)
   const mediatorLiveData = new M()
 
-  mediatorLiveData.addSource(liveData, value => {
-    console.log('Source changed')
-    mediatorLiveData.set(value)
-  })
-  mediatorLiveData.subscribe(value => {
-    console.log('Mediator changed')
-    console.log(value)
-  })
+  // When
+  mediatorLiveData.addSource(liveData, value => mediatorLiveData.set(value))
+  mediatorLiveData.subscribe(value => spy(value))
+  liveData.set(false)
 
-  liveData.set(1)
-  liveData.set(2)
-
-  t.true(true)
+  // Then
+  t.true(spy.calledWith(true))
 })
