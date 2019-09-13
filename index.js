@@ -16,10 +16,10 @@ function LiveData(initialValue, onActive, onInactive) {
     observers.push(observer)
 
     // Trigger onActive if first one subscribed
-    onActive && observers.length === 1 && onActive() // eslint-disable-line no-unused-expressions
+    onActive && observers.length === 1 && onActive();// eslint-disable-line no-unused-expressions
 
     // Immediatly notify of current value
-    observer(value)
+    (value !== undefined) && observer(value)// eslint-disable-line no-unused-expressions
 
     // Unsubscribe
     return function () {
