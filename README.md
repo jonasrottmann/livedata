@@ -24,7 +24,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **minified [IIFE](https://dev
 <script src="https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata.min.js" charset="utf-8"></script>
 
 <script>
-    const counter = new LiveData(0)
+    const counter = new livedata.LiveData('👋')
     ...
 </script>
 ```
@@ -33,9 +33,9 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 
 ```html
 <script type=module>
-    import LiveData from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-module.js'
+    import {LiveData} from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-module.js'
 
-    const counter = new LiveData(0)
+    const counter = new LiveData('👋')
     ...
 </script>
 ```
@@ -47,7 +47,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 > 🚧 This documentation is work in prograss...
 
 ```javascript
-import LiveData from '@jonasrottmann/livedata'
+import {LiveData} from '@jonasrottmann/livedata'
 
 // Create a new observable container with the initial value `true`
 const livedata = new LiveData(true);
@@ -111,6 +111,8 @@ switched.subscribe(v => console.log(v))
 For example we can combine two `LiveData`s (`liveDataA` and `liveDataB`) in a `MediatorLiveData` by adding them as sources. Whenever `liveDataA` or `liveDataB` emits a new value, `mediator` will be updated.
 
 ```javascript
+import {LiveData, MediatorLiveData} from '@jonasrottmann/livedata'
+
 const liveDataA = new LiveData('🅰️')
 const liveDataB = new LiveData('🅱️')
 
