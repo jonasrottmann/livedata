@@ -94,7 +94,7 @@ function MediatorLiveData(initialValue) {
   }, () => {
     // OnInactive
     sources.forEach(value => {
-      value.ubsub()
+      value.unsub()
     })
   })
 

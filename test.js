@@ -218,3 +218,41 @@ test('given a MediatorLiveData when adding a source then the subscription will b
   // Then
   t.true(spy.calledWith(true))
 })
+
+test('given a MediatorLiveData when removing a source then unsubscribe on the source should happen', t => {
+  const spy = sinon.spy()
+  const onActive = sinon.spy()
+  const onInactive = sinon.spy()
+
+  // Given
+  const liveData = new L(true, onActive, onInactive)
+  const mediatorLiveData = new M()
+  const removeSource = mediatorLiveData.addSource(liveData, value => mediatorLiveData.set(value))
+  mediatorLiveData.subscribe(value => spy(value))
+
+  // When
+  removeSource()
+
+  // Then
+  t.true(onActive.calledOnce)
+  t.true(onInactive.calledOnce)
+})
+
+test('given a MediatorLiveData when unsubscribing from it all sources should be unsubscribed', t => {
+  const spy = sinon.spy()
+  const onActive = sinon.spy()
+  const onInactive = sinon.spy()
+
+  // Given
+  const liveData = new L(true, onActive, onInactive)
+  const mediatorLiveData = new M()
+  mediatorLiveData.addSource(liveData, value => mediatorLiveData.set(value))
+  const unsub = mediatorLiveData.subscribe(value => spy(value))
+
+  // When
+  unsub()
+
+  // Then
+  t.true(onActive.calledOnce)
+  t.true(onInactive.calledOnce)
+})
