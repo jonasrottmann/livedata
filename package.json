@@ -13,8 +13,8 @@
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup -c",
-    "pretest": "npm run build",
     "test": "run-p test-*",
+    "pretest-unit": "npm run build",
     "test-unit": "nyc ava --serial",
     "test-lint": "xo",
     "test-typings": "tsd"
@@ -40,8 +40,8 @@
     "rollup": "^1.21.2",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-cleanup": "^3.1.1",
-    "rollup-plugin-terser": "^5.1.1",
-    "sinon": "^7.4.1",
+    "rollup-plugin-terser": "^5.1.2",
+    "sinon": "^7.4.2",
     "tsd": "^0.7.4",
     "xo": "^0.24.0"
   },

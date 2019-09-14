@@ -8,7 +8,7 @@
 
 `LiveData` is a very small observable value container targeted at small apps. The goal ist to make observing app state as easy as possible.
 
-## Install
+## 🧰 Install
 
 Install via npm/yarn:
 
@@ -24,7 +24,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **minified [IIFE](https://dev
 <script src="https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata.min.js" charset="utf-8"></script>
 
 <script>
-    const counter = new LiveData(0)
+    const counter = new livedata.LiveData('👋')
     ...
 </script>
 ```
@@ -33,21 +33,21 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 
 ```html
 <script type=module>
-    import LiveData from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-module.js'
+    import {LiveData} from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-module.js'
 
-    const counter = new LiveData(0)
+    const counter = new LiveData('👋')
     ...
 </script>
 ```
 
-## Usage
+## 👩‍💻 Usage
 
 **For a simple counter example check out [counter.html](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.
 
 > 🚧 This documentation is work in prograss...
 
 ```javascript
-import LiveData from '@jonasrottmann/livedata'
+import {LiveData} from '@jonasrottmann/livedata'
 
 // Create a new observable container with the initial value `true`
 const livedata = new LiveData(true);
@@ -104,6 +104,41 @@ switched.subscribe(v => console.log(v))
 
 `switched` will now emit the values emitted by `switchA` if `trigger` contains `true` and the values emitted by `switchB` if `trigger` contains `false`.
 
-## License
+### `MediatorLiveData`
+
+`MediatorLiveData` is a subclass of `LiveData` which allows to listen to multiple source `LiveData`s and react to value changes.
+
+For example we can combine two `LiveData`s (`liveDataA` and `liveDataB`) in a `MediatorLiveData` by adding them as sources. Whenever `liveDataA` or `liveDataB` emits a new value, `mediator` will be updated.
+
+```javascript
+import {LiveData, MediatorLiveData} from '@jonasrottmann/livedata'
+
+const liveDataA = new LiveData('🅰️')
+const liveDataB = new LiveData('🅱️')
+
+const mediator = new MediatorLiveData();
+
+mediator.addSource(liveDataA, value => {
+    mediator.set(value)
+});
+mediator.addSource(liveDataB, value => {
+    mediator.set(value)
+});
+```
+
+In this example we only want 10 values emitted by the source `LiveData` to be picked up by `mediatorLiveData`. After 10 values we stop listening to the source `LiveData` and remove it as a source of `mediatorLiveData`.
+
+```javascript
+let counter = 0
+const remove = mediatorLiveData.addSource(liveData, value => {
+    counter++
+    mediatorLiveData.set(value)
+    if (counter >= 10) {
+        remove()
+    }
+})
+```
+
+## 👨‍⚖️ License
 
 [MIT](LICENSE.md)

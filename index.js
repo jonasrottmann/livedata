@@ -1,4 +1,4 @@
-export default function LiveData(initialValue, onActive, onInactive) {
+function LiveData(initialValue, onActive, onInactive) {
   let value = initialValue
   let observers = []
 
@@ -16,10 +16,10 @@ export default function LiveData(initialValue, onActive, onInactive) {
     observers.push(observer)
 
     // Trigger onActive if first one subscribed
-    onActive && observers.length === 1 && onActive() // eslint-disable-line no-unused-expressions
+    onActive && observers.length === 1 && onActive();// eslint-disable-line no-unused-expressions
 
     // Immediatly notify of current value
-    observer(value)
+    (value !== undefined) && observer(value)// eslint-disable-line no-unused-expressions
 
     // Unsubscribe
     return function () {
@@ -72,6 +72,7 @@ export default function LiveData(initialValue, onActive, onInactive) {
   }
 
   return {
+    isActive: () => observers.length > 0,
     get: () => value,
     set: value => transition(() => value),
     subscribe,
@@ -79,4 +80,47 @@ export default function LiveData(initialValue, onActive, onInactive) {
     map,
     switchMap
   }
+}
+
+function MediatorLiveData(initialValue) {
+  const sources = new Map()
+
+  function subscribeToSource(ld, onChange) {
+    const unsub = ld.subscribe(onChange)
+    sources.set(ld, {onChange, unsub})
+  }
+
+  const ld = new LiveData(initialValue, () => {
+    // OnActive
+    sources.forEach((value, key) => subscribeToSource(key, value.onChange))
+  }, () => {
+    // OnInactive
+    sources.forEach(value => value.unsub())
+  })
+
+  function addSource(source, onChange) {
+    const mapEntry = {onChange}
+    sources.set(source, mapEntry)
+    ld.isActive() && subscribeToSource(source, onChange) // eslint-disable-line no-unused-expressions
+
+    return function () {
+      sources.get(source).unsub()
+      sources.delete(source)
+    }
+  }
+
+  return {
+    addSource,
+    get: ld.get,
+    isActive: ld.isActive,
+    map: ld.map,
+    set: ld.set,
+    subscribe: ld.subscribe,
+    switchMap: ld.switchMap,
+    transition: ld.transition
+  }
+}
+
+export {
+  LiveData, MediatorLiveData
 }
