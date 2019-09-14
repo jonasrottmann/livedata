@@ -1,4 +1,4 @@
-export default class LiveData<T> {
+declare class LiveData<T> {
     /**
      * @param initialValue 
      * @param onActive A handler which is called whenever the number of observers changes from 0 to 1.
@@ -47,4 +47,19 @@ export default class LiveData<T> {
      * @returns A new LiveData.
      */
     switchMap<S>(transformer: (value: T) => LiveData<S>) : LiveData<S>;
+}
+
+declare class MediatorLiveData<T> extends LiveData<T> {
+    /**
+     * Adds a source...
+     * 
+     * @param liveData 
+     * @param onChange Called when the source values changes. Usually used to set the value of the MediatorLiveData.
+     * @returns A handle to remove the added source.
+     */
+    addSource<S>(liveData: LiveData<S>, onChange: (value: S) => void): () => void
+}
+
+export {
+    LiveData, MediatorLiveData
 }
