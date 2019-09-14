@@ -49,12 +49,15 @@ declare class LiveData<T> {
     switchMap<S>(transformer: (value: T) => LiveData<S>) : LiveData<S>;
 }
 
+/**
+ * A LiveData subclass which can observe multiple LiveData objects and react to value changes of each one.
+ */
 declare class MediatorLiveData<T> extends LiveData<T> {
     /**
-     * Adds a source...
+     * Starts to listen the given source LiveData, onChange observer will be called when source value was changed. 
      * 
-     * @param liveData 
-     * @param onChange Called when the source values changes. Usually used to set the value of the MediatorLiveData.
+     * @param liveData The source LiveData to listen to.
+     * @param onChange Called when the source values changes, but only if the MediatorLiveData is active (has at least one observer). Usually used to set the value of the MediatorLiveData.
      * @returns A handle to remove the added source.
      */
     addSource<S>(liveData: LiveData<S>, onChange: (value: S) => void): () => void
