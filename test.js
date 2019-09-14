@@ -10,6 +10,14 @@ test('given a LiveData with initial value then get will return it', t => {
   t.true(ld.get())
 })
 
+test('given a LiveData when not subscribed to then it is not active', t => {
+  // Given
+  const ld = new L()
+
+  // Then
+  t.false(ld.isActive())
+})
+
 test('given a LiveData when setting another value get will return it', t => {
   // Given
   const ld = new L(true)
@@ -255,4 +263,19 @@ test('given a MediatorLiveData when unsubscribing from it all sources should be 
   // Then
   t.true(onActive.calledOnce)
   t.true(onInactive.calledOnce)
+})
+
+test('given a MediatorLiveData which is active when a source is added it should be immediatly be subscribed to', t => {
+  const spy = sinon.spy()
+
+  // Given
+  const liveData = new L(true)
+  const mediatorLiveData = new M()
+  mediatorLiveData.subscribe(value => spy(value))
+
+  // Then
+  mediatorLiveData.addSource(liveData, value => mediatorLiveData.set(value))
+
+  // Then
+  t.is(spy.callCount, 1)
 })

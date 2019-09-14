@@ -22,6 +22,11 @@ declare class LiveData<T> {
     set(value: T): T;
 
     /**
+     * @returns `true` if there are observers.
+     */
+    isActive(): boolean
+
+    /**
      * @param action A function which receives the current state and produces the new one.
      */
     transition(action: (value: T) => T): void;

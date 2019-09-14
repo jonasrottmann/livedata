@@ -72,6 +72,7 @@ function LiveData(initialValue, onActive, onInactive) {
   }
 
   return {
+    isActive: () => observers.length > 0,
     get: () => value,
     set: value => transition(() => value),
     subscribe,
@@ -84,22 +85,23 @@ function LiveData(initialValue, onActive, onInactive) {
 function MediatorLiveData(initialValue) {
   const sources = new Map()
 
+  function subscribeToSource(ld, onChange) {
+    const unsub = ld.subscribe(onChange)
+    sources.set(ld, {onChange, unsub})
+  }
+
   const ld = new LiveData(initialValue, () => {
     // OnActive
-    sources.forEach((value, key, map) => {
-      const unsub = key.subscribe(value.onChange)
-      value.unsub = unsub
-      map.set(key, value)
-    })
+    sources.forEach((value, key) => subscribeToSource(key, value.onChange))
   }, () => {
     // OnInactive
-    sources.forEach(value => {
-      value.unsub()
-    })
+    sources.forEach(value => value.unsub())
   })
 
   function addSource(source, onChange) {
-    sources.set(source, {onChange})
+    const mapEntry = {onChange}
+    sources.set(source, mapEntry)
+    ld.isActive() && subscribeToSource(source, onChange) // eslint-disable-line no-unused-expressions
 
     return function () {
       sources.get(source).unsub()
@@ -110,6 +112,7 @@ function MediatorLiveData(initialValue) {
   return {
     addSource,
     get: ld.get,
+    isActive: ld.isActive,
     map: ld.map,
     set: ld.set,
     subscribe: ld.subscribe,
