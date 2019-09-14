@@ -104,6 +104,39 @@ switched.subscribe(v => console.log(v))
 
 `switched` will now emit the values emitted by `switchA` if `trigger` contains `true` and the values emitted by `switchB` if `trigger` contains `false`.
 
+### `MediatorLiveData`
+
+`MediatorLiveData` is a subclass of `LiveData` which allows to listen to multiple source `LiveData`s and react to value changes.
+
+For example we can combine two `LiveData`s (`liveDataA` and `liveDataB`) in a `MediatorLiveData` by adding them as sources. Whenever `liveDataA` or `liveDataB` emits a new value, `mediator` will be updated.
+
+```javascript
+const liveDataA = new LiveData('🅰️')
+const liveDataB = new LiveData('🅱️')
+
+const mediator = new MediatorLiveData();
+
+mediator.addSource(liveDataA, value => {
+    mediator.set(value)
+});
+mediator.addSource(liveDataB, value => {
+    mediator.set(value)
+});
+```
+
+In this example we only want 10 values emitted by the source `LiveData` to be picked up by `mediatorLiveData`. After 10 values we stop listening to the source `LiveData` and remove it as a source of `mediatorLiveData`.
+
+```javascript
+let counter = 0
+const remove = mediatorLiveData.addSource(liveData, value => {
+    counter++
+    mediatorLiveData.set(value)
+    if (counter >= 10) {
+        remove()
+    }
+})
+```
+
 ## License
 
 [MIT](LICENSE.md)
