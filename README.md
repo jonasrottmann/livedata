@@ -8,7 +8,7 @@
 
 `LiveData` is a very small observable value container targeted at small apps. The goal ist to make observing app state as easy as possible.
 
-## Install
+## 🧰 Install
 
 Install via npm/yarn:
 
@@ -40,7 +40,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 </script>
 ```
 
-## Usage
+## 👩‍💻 Usage
 
 **For a simple counter example check out [counter.html](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.
 
@@ -137,6 +137,6 @@ const remove = mediatorLiveData.addSource(liveData, value => {
 })
 ```
 
-## License
+## 👨‍⚖️ License
 
 [MIT](LICENSE.md)
