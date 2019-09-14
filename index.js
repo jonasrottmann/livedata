@@ -108,8 +108,13 @@ function MediatorLiveData(initialValue) {
   }
 
   return {
-    ...ld,
-    addSource
+    addSource,
+    get: ld.get,
+    map: ld.map,
+    set: ld.set,
+    subscribe: ld.subscribe,
+    switchMap: ld.switchMap,
+    transition: ld.transition
   }
 }
 
