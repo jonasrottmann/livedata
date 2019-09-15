@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel'
 import {terser} from 'rollup-plugin-terser'
 import cleanup from 'rollup-plugin-cleanup'
+import bundleSize from 'rollup-plugin-bundle-size'
 import pkg from './package.json' // eslint-disable-line import/extensions
 
 export default [
@@ -11,7 +12,8 @@ export default [
       babel({
         presets: [['@babel/preset-env', {targets: {browsers: 'defaults'}}]]
       }),
-      terser()
+      terser(),
+      bundleSize()
     ]
   },
   {
