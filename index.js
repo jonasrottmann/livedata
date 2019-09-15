@@ -92,15 +92,14 @@ function MediatorLiveData(initialValue) {
 
   const ld = new LiveData(initialValue, () => {
     // OnActive
-    sources.forEach((value, key) => subscribeToSource(key, value.onChange))
+    sources.forEach((value, ld) => subscribeToSource(ld, value.onChange))
   }, () => {
     // OnInactive
     sources.forEach(value => value.unsub())
   })
 
   function addSource(source, onChange) {
-    const mapEntry = {onChange}
-    sources.set(source, mapEntry)
+    sources.set(source, {onChange})
     ld.isActive() && subscribeToSource(source, onChange) // eslint-disable-line no-unused-expressions
 
     return function () {
