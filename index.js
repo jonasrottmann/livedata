@@ -34,9 +34,7 @@ function LiveData(initialValue, onActive, onInactive) {
       transformer(value), // Initial value is mapped from original current value
       () => {
         // When becoming active add to subscribers of original LiveData
-        unsubscribe = subscribe(v => {
-          mapped.set(transformer(v))
-        })
+        unsubscribe = subscribe(v => mapped.set(transformer(v)))
       },
       () => {
         // When becoming inactive remove from subscribers of original LiveData
@@ -49,14 +47,14 @@ function LiveData(initialValue, onActive, onInactive) {
   function switchMap(transformer) {
     let unsubscribe
     let currentResult
-    let resultUnsubscribe = () => {}
+    let resultUnsubscribe
     const switched = new LiveData(
       transformer(value).get(),
       () => {
         unsubscribe = subscribe(v => {
           const newResult = transformer(v)
           if (currentResult !== newResult) {
-            resultUnsubscribe()
+            resultUnsubscribe && resultUnsubscribe()// eslint-disable-line no-unused-expressions
             currentResult = newResult
             resultUnsubscribe = newResult.subscribe(v => switched.set(v))
           }
