@@ -24,7 +24,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **minified [IIFE](https://dev
 <script src="https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata.min.js" charset="utf-8"></script>
 
 <script>
-    const counter = new livedata.LiveData('👋')
+    const hello = new livedata.LiveData('👋')
     ...
 </script>
 ```
@@ -35,7 +35,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 <script type=module>
     import {LiveData} from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-module.js'
 
-    const counter = new LiveData('👋')
+    const hello = new LiveData('👋')
     ...
 </script>
 ```
@@ -66,6 +66,21 @@ livedata.set(true)
 // End the subscription
 unsubscribe()
 ```
+
+`LiveData` aditionally can receive two callbacks `onActive` and `onInactive`, which will be called when the first observer is added or the last one removed. This can be useful for adding/removing event listeners to modify the `LiveData`s value.
+
+```javascript
+const listener = e => keyboardLiveData.set(e)
+const keyboardLiveData = new LiveData(
+    undefined,
+    // onActive
+    () => window.addEventListener('keyup', listener),
+    // onInactive
+    () => window.removeEventListener('keyup', listener)
+)
+```
+
+`keyboardLiveData` will start listening to keyboard presses as soon as the first observer calls `subscribe` and will stop when the last observer has been removed.
 
 ### Transformations
 
