@@ -33,7 +33,7 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 
 ```html
 <script type=module>
-    import {LiveData} from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-module.js'
+    import {LiveData} from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-esm.js'
 
     const hello = new LiveData('👋')
     ...
@@ -93,8 +93,10 @@ const keyboardLiveData = new LiveData(
 `map` is used to apply the given transformer function to each value emitted by the source `LiveData` and returns a new `LiveData` which emits those resulting values.
 
 ```javascript
+import {LiveData, map} from '@jonasrottmann/livedata'
+
 const source = new LiveData(true)
-const mapped = source.map(v => v ? '✅' : '🛑')
+const mapped = map(source, v => v ? '✅' : '🛑')
 
 mapped.subsribe(v => console.log(v))
 
@@ -108,11 +110,13 @@ Will print `✅` followed by `🛑`.
 `switchMap` is used to react to changes to the trigger `LiveData` and returns a new `LiveData` which emits values from whatever `LiveData` the transfomer function returns.
 
 ```javascript
+import {LiveData, switchMap} from '@jonasrottmann/livedata'
+
 const trigger = new LiveData(true)
 const switchA = new LiveData('🅰️')
 const switchB = new LiveData('🅱️')
 
-const switched = trigger.switchMap(v => v ? switchA : switchB)
+const switched = switchMap(trigger, v => v ? switchA : switchB)
 
 switched.subscribe(v => console.log(v))
 ```

@@ -67,8 +67,8 @@ function MediatorLiveData(initialValue) {
     addSource,
     get: ld.get,
     isActive: ld.isActive,
-    map: ld.map,
     set: ld.set,
+    subscribe: ld.subscribe,
     transition: ld.transition
   }
 }
