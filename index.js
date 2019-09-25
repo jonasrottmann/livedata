@@ -5,9 +5,9 @@ function LiveData(initialValue, onActive, onInactive) {
   function transition(action) {
     const last = value
     // Transition to new value
-    value = action(value)
+    value = action(last)
     // Notify all observers if value changed
-    value !== last && observers.forEach(observer => observer(value, last)) // eslint-disable-line no-unused-expressions
+    value !== last && observers.forEach(observer => observer(value, last))// eslint-disable-line no-unused-expressions
     return value
   }
 
@@ -28,55 +28,12 @@ function LiveData(initialValue, onActive, onInactive) {
     }
   }
 
-  function map(transformer) {
-    let unsubscribe
-    const mapped = new LiveData(
-      transformer(value), // Initial value is mapped from original current value
-      () => {
-        // When becoming active add to subscribers of original LiveData
-        unsubscribe = subscribe(v => mapped.set(transformer(v)))
-      },
-      () => {
-        // When becoming inactive remove from subscribers of original LiveData
-        unsubscribe()
-      })
-
-    return mapped
-  }
-
-  function switchMap(transformer) {
-    let unsubscribe
-    let currentResult
-    let resultUnsubscribe
-    const switched = new LiveData(
-      transformer(value).get(),
-      () => {
-        unsubscribe = subscribe(v => {
-          const newResult = transformer(v)
-          if (currentResult !== newResult) {
-            resultUnsubscribe && resultUnsubscribe()// eslint-disable-line no-unused-expressions
-            currentResult = newResult
-            resultUnsubscribe = newResult.subscribe(v => switched.set(v))
-          }
-        })
-      },
-      () => {
-        resultUnsubscribe()
-        unsubscribe()
-      }
-    )
-
-    return switched
-  }
-
   return {
     isActive: () => observers.length > 0,
     get: () => value,
     set: value => transition(() => value),
     subscribe,
-    transition,
-    map,
-    switchMap
+    transition
   }
 }
 
@@ -112,12 +69,54 @@ function MediatorLiveData(initialValue) {
     isActive: ld.isActive,
     map: ld.map,
     set: ld.set,
-    subscribe: ld.subscribe,
-    switchMap: ld.switchMap,
     transition: ld.transition
   }
 }
 
+function map(livedata, transformer) {
+  let unsubscribe
+  const mapped = new LiveData(
+    transformer(livedata.get()), // Initial value is mapped from original current value
+    () => {
+      // When becoming active add to subscribers of original LiveData
+      unsubscribe = livedata.subscribe(v => mapped.set(transformer(v)))
+    },
+    () => {
+      // When becoming inactive remove from subscribers of original LiveData
+      unsubscribe()
+    })
+
+  return mapped
+}
+
+function switchMap(livedata, transformer) {
+  let unsubscribe
+  let currentResult
+  let resultUnsubscribe
+  const switched = new LiveData(
+    transformer(livedata.get()).get(),
+    () => {
+      unsubscribe = livedata.subscribe(v => {
+        const newResult = transformer(v)
+        if (currentResult !== newResult) {
+          resultUnsubscribe && resultUnsubscribe()// eslint-disable-line no-unused-expressions
+          currentResult = newResult
+          resultUnsubscribe = newResult.subscribe(v => switched.set(v))
+        }
+      })
+    },
+    () => {
+      resultUnsubscribe()
+      unsubscribe()
+    }
+  )
+
+  return switched
+}
+
 export {
-  LiveData, MediatorLiveData
+  LiveData,
+  MediatorLiveData,
+  switchMap,
+  map
 }
