@@ -60,7 +60,7 @@
     "space": true,
     "semicolon": false,
     "envs": [
-      "browser"
+      "shared-node-browser"
     ],
     "ignores": [
       "*.d.ts",
