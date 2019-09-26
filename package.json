@@ -43,7 +43,7 @@
     "rollup-plugin-terser": "^5.1.2",
     "sinon": "^7.5.0",
     "tsd": "^0.8.0",
-    "xo": "^0.24.0"
+    "xo": "^0.25.3"
   },
   "keywords": [
     "data flow",

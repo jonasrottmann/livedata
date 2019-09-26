@@ -1,7 +1,7 @@
 import babel from 'rollup-plugin-babel'
 import {terser} from 'rollup-plugin-terser'
 import bundleSize from 'rollup-plugin-bundle-size'
-import pkg from './package.json' // eslint-disable-line import/extensions
+import pkg from './package.json'
 
 export default [
   {
