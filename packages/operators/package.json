@@ -1,0 +1,20 @@
+{
+    "name": "@jonasrottmann/livedata-operators",
+    "version": "0.0.1",
+    "main": "dist/livedata-operators-umd.js",
+    "module": "dist/livedata-operators-esm.js",
+    "unpkg": "dist/livedata-operators.min.js",
+    "files": [
+      "dist",
+      "index.d.ts"
+    ],
+    "peerDependencies": {
+      "@jonasrottmann/livedata": ">=0.0.8"
+    },
+    "devDependencies": {
+      "@jonasrottmann/livedata": ">=0.0.8"
+    },
+    "types": "index.d.ts",
+    "xo": false
+  }
+  

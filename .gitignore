@@ -1,4 +1,4 @@
-dist/
+**/dist/
 
 # Created by https://www.gitignore.io/api/node,code,linux,macos
 # Edit at https://www.gitignore.io/?templates=node,code,linux,macos

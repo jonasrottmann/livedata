@@ -1,0 +1,14 @@
+{
+  "name": "@jonasrottmann/livedata",
+  "version": "0.0.8",
+  "description": "✨ Simple, zero dependency, observable value container. ✨",
+  "main": "dist/livedata-umd.js",
+  "module": "dist/livedata-esm.js",
+  "unpkg": "dist/livedata.min.js",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "types": "index.d.ts",
+  "xo": false
+}

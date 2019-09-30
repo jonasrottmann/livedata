@@ -17,4 +17,5 @@ jobs:
       with:
         node-version: 8.x
     - run: npm ci
+    - run: npx lerna bootstrap
     - run: npm test

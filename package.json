@@ -1,51 +1,18 @@
 {
-  "name": "@jonasrottmann/livedata",
-  "version": "0.0.7",
-  "description": "✨ Simple, zero dependency, observable value container. ✨",
-  "main": "dist/livedata-umd.js",
-  "module": "dist/livedata-esm.js",
-  "unpkg": "dist/livedata.min.js",
-  "files": [
-    "dist",
-    "index.d.ts"
-  ],
-  "scripts": {
-    "clean": "rm -rf dist/",
-    "prebuild": "npm run clean",
-    "build": "rollup -c",
-    "test": "run-p test-*",
-    "pretest-unit": "npm run build",
-    "test-unit": "nyc ava --serial",
-    "test-lint": "xo",
-    "test-typings": "tsd"
-  },
-  "types": "index.d.ts",
+  "name": "livedata",
+  "private": true,
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonasrottmann/livedata.git"
   },
   "author": "Jonas Rottmann",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jonasrottmann/livedata/issues"
   },
   "homepage": "https://github.com/jonasrottmann/livedata#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "ava": "^2.4.0",
-    "npm-run-all": "^4.1.5",
-    "nyc": "^14.1.1",
-    "rollup": "^1.21.4",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-bundle-size": "^1.0.3",
-    "rollup-plugin-terser": "^5.1.2",
-    "sinon": "^7.5.0",
-    "tsd": "^0.8.0",
-    "xo": "^0.25.3"
-  },
   "keywords": [
+    "livedata",
     "data flow",
     "observable",
     "reactive",
@@ -55,6 +22,32 @@
     "state",
     "store"
   ],
+  "scripts": {
+    "clean": "lerna exec -- rm -rf dist/",
+    "prebuild": "lerna run clean",
+    "build": "rollup -c",
+    "test": "run-p test-*",
+    "test-unit": "nyc ava",
+    "test-lint": "xo",
+    "test-typings": "lerna exec -- tsd"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/register": "^7.6.2",
+    "ava": "^2.4.0",
+    "lerna": "^3.16.4",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^14.1.1",
+    "rollup": "^1.22.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-bundle-size": "^1.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "sinon": "^7.5.0",
+    "tsd": "^0.9.0",
+    "xo": "^0.25.3"
+  },
   "xo": {
     "space": true,
     "semicolon": false,
@@ -62,8 +55,26 @@
       "shared-node-browser"
     ],
     "ignores": [
-      "*.d.ts",
-      "*.test-d.ts"
+      "**/*.d.ts",
+      "**/*.test-d.ts"
+    ],
+    "rules": {
+      "import/no-extraneous-dependencies": 0
+    }
+  },
+  "ava": {
+    "require": [
+      "@babel/register"
+    ]
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "packages/**"
+    ],
+    "exclude": [
+      "**/dist/**",
+      "**/test/**"
     ]
   }
 }
