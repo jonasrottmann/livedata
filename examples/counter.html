@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 
-<!-- 
+<!--
     This example can be explored on CodePen https://codepen.io/jonasrottmann/pen/WNeMPEv
 -->
 
@@ -15,7 +15,6 @@
         window.onload = () => {
             counter.subscribe((v, o) => {
                 console.log(`Counter value changed from ${o} to ${v}!`)
-                
                 document.querySelector('#value').textContent = v
             })
         }

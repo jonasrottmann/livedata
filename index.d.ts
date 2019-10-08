@@ -1,6 +1,6 @@
 declare class LiveData<T> {
     /**
-     * @param initialValue 
+     * @param initialValue
      * @param onActive A handler which is called whenever the number of observers changes from 0 to 1.
      * @param onInactive A handler which is called whenever the number of observers changes from 1 to 0.
      */
@@ -8,9 +8,9 @@ declare class LiveData<T> {
 
     /**
      * Access the current value of this LiveData.
-     * 
+     *
      * ⚠️ Derived LiveDatas (created by `map` or `switchMap`) will not pick up values from the source LiveData if not active.
-     * 
+     *
      * @returns The current value.
      */
     get(): T;
@@ -39,7 +39,7 @@ declare class LiveData<T> {
 
     /**
      * Builds a new LiveData whose value gets updated (during it's active) whenever the source changes.
-     * 
+     *
      * @param transformer A mapping to apply to values of the source.
      * @returns A new LiveData.
      */
@@ -47,7 +47,7 @@ declare class LiveData<T> {
 
     /**
      * Builds a new LiveData whose value gets updated (during it's active) whenever the tigger changes or the LiveData result of the transformation updates.
-     * 
+     *
      * @param transformer A mapping for switching to another LiveData depending on the value of the trigger.
      * @returns A new LiveData.
      */
@@ -59,8 +59,8 @@ declare class LiveData<T> {
  */
 declare class MediatorLiveData<T> extends LiveData<T> {
     /**
-     * Starts to listen the given source LiveData, onChange observer will be called when source value was changed. 
-     * 
+     * Starts to listen the given source LiveData, onChange observer will be called when source value was changed.
+     *
      * @param liveData The source LiveData to listen to.
      * @param onChange Called when the source values changes, but only if the MediatorLiveData is active (has at least one observer). Usually used to set the value of the MediatorLiveData.
      * @returns A handle to remove the added source.
