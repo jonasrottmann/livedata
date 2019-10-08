@@ -1,4 +1,4 @@
-declare class LiveData<T> {
+export declare class LiveData<T> {
   /**
    * @param initialValue
    * @param onActive A handler which is called whenever the number of observers changes from 0 to 1.
@@ -8,8 +8,6 @@ declare class LiveData<T> {
 
   /**
    * Access the current value of this LiveData.
-   *
-   * ⚠️ Derived LiveDatas (created by `map` or `switchMap`) will not pick up values from the source LiveData if not active.
    *
    * @returns The current value.
    */
@@ -41,7 +39,7 @@ declare class LiveData<T> {
 /**
 * A LiveData subclass which can observe multiple LiveData objects and react to value changes of each one.
 */
-declare class MediatorLiveData<T> extends LiveData<T> {
+export declare class MediatorLiveData<T> extends LiveData<T> {
   /**
    * Starts to listen the given source LiveData, onChange observer will be called when source value was changed.
    *
@@ -55,19 +53,21 @@ declare class MediatorLiveData<T> extends LiveData<T> {
 /**
  * Builds a new LiveData whose value gets updated (during it's active) whenever the source changes.
  *
+ * ⚠️ This derived LiveData will not pick up values from the source LiveData if not active.
+ *
+ * @param liveData The source LiveData.
  * @param transformer A mapping to apply to values of the source.
  * @returns A new LiveData.
  */
-declare function map<T, S>(liveData: LiveData<T>, transformer: (value: T) => S): LiveData <S>;
+export declare function map<T, S>(liveData: LiveData<T>, transformer: (value: T) => S): LiveData <S>;
 
 /**
  * Builds a new LiveData whose value gets updated (during it's active) whenever the tigger changes or the LiveData result of the transformation updates.
  *
+ * ⚠️ This derived LiveData will not pick up values from the trigger LiveData if not active.
+ *
+ * @param liveData The trigger LiveData.
  * @param transformer A mapping for switching to another LiveData depending on the value of the trigger.
  * @returns A new LiveData.
  */
-declare function switchMap<T, S>(liveData: LiveData<T>, transformer: (value: T) => LiveData <S>): LiveData <S>;
-
-export {
-  LiveData, MediatorLiveData, map, switchMap
-}
+export declare function switchMap<T, S>(liveData: LiveData<T>, transformer: (value: T) => LiveData <S>): LiveData <S>;
