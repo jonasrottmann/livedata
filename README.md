@@ -82,11 +82,23 @@ const keyboardLiveData = new LiveData(
 
 `keyboardLiveData` will start listening to keyboard presses as soon as the first observer calls `subscribe` and will stop when the last observer has been removed.
 
+## Derivations
+
+The following methods allow to derive a new `LiveData` from an existing `LiveData`.
+
+> ⚠️ The new `LiveData` must be active (have at least one observer) to pick up changes from the source.
+
+### Filter
+
+#### `filter`
+
+TODO: Document `filter`
+
+#### `distinct`
+
+TODO: Document `distinct`
+
 ### Transformations
-
-`map` and `switchMap` allow to derive a new `LiveData` from an existing `LiveData`.
-
-> ⚠️ In both cases the derived `LiveData` must be active (have at least one observer) to pick up changes from the source.
 
 #### `map`
 
@@ -119,7 +131,7 @@ switched.subscribe(v => console.log(v))
 
 `switched` will now emit the values emitted by `switchA` if `trigger` contains `true` and the values emitted by `switchB` if `trigger` contains `false`.
 
-### `MediatorLiveData`
+## Mediator
 
 `MediatorLiveData` is a subclass of `LiveData` which allows to listen to multiple source `LiveData`s and react to value changes.
 
