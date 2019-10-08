@@ -6,8 +6,8 @@ function LiveData(initialValue, onActive, onInactive) {
     const last = value
     // Transition to new value
     value = action(value)
-    // Notify all observers if value changed
-    value !== last && observers.forEach(observer => observer(value, last)) // eslint-disable-line no-unused-expressions
+    // Notify all observers
+    observers.forEach(observer => observer(value, last))
     return value
   }
 

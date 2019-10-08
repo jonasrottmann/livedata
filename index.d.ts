@@ -53,21 +53,32 @@ export declare class MediatorLiveData<T> extends LiveData<T> {
 /**
  * Builds a new LiveData whose value gets updated (during it's active) whenever the source changes.
  *
- * ⚠️ This derived LiveData will not pick up values from the source LiveData if not active.
- *
  * @param liveData The source LiveData.
  * @param transformer A mapping to apply to values of the source.
  * @returns A new LiveData.
  */
-export declare function map<T, S>(liveData: LiveData<T>, transformer: (value: T) => S): LiveData <S>;
+export declare function map<T, S>(liveData: LiveData<T>, transformer: (value: T) => S): LiveData<S>;
 
 /**
  * Builds a new LiveData whose value gets updated (during it's active) whenever the tigger changes or the LiveData result of the transformation updates.
- *
- * ⚠️ This derived LiveData will not pick up values from the trigger LiveData if not active.
  *
  * @param liveData The trigger LiveData.
  * @param transformer A mapping for switching to another LiveData depending on the value of the trigger.
  * @returns A new LiveData.
  */
-export declare function switchMap<T, S>(liveData: LiveData<T>, transformer: (value: T) => LiveData <S>): LiveData <S>;
+export declare function switchMap<T, S>(liveData: LiveData<T>, transformer: (value: T) => LiveData<S>): LiveData <S>;
+
+/**
+ *
+ * @param liveData The LiveData to be filtered.
+ * @param predicate Decides wether the value is allowed (returns true if value is allowed).
+ * @returns A new LiveData.
+ */
+export declare function filter<T>(liveData: LiveData<T>, predicate: (value: T) => Boolean): LiveData<T>;
+
+/**
+ * @param liveData The LiveData to be filtered.
+ * @param comparator Defaults to strict equality comparison (===).
+ * @returns A new LiveData.
+ */
+export declare function distinct<T>(liveData: LiveData<T>, comparator: (a: T, b: T) => Boolean): LiveData<T>;
