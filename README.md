@@ -94,7 +94,7 @@ const keyboardLiveData = new LiveData(
 
 ```javascript
 const source = new LiveData(true)
-const mapped = source.map(v => v ? '✅' : '🛑')
+const mapped = map(source, v => v ? '✅' : '🛑')
 
 mapped.subsribe(v => console.log(v))
 
@@ -112,7 +112,7 @@ const trigger = new LiveData(true)
 const switchA = new LiveData('🅰️')
 const switchB = new LiveData('🅱️')
 
-const switched = trigger.switchMap(v => v ? switchA : switchB)
+const switched = switchMap(trigger, v => v ? switchA : switchB)
 
 switched.subscribe(v => console.log(v))
 ```

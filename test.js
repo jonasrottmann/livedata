@@ -1,6 +1,7 @@
 import test from 'ava'
 import sinon from 'sinon'
-import {LiveData as L, MediatorLiveData as M} from '.'
+import {LiveData as L, MediatorLiveData as M} from './livedata'
+import {map, switchMap} from './transformations'
 
 test('given a LiveData with initial value then get will return it', t => {
   // Given
@@ -108,7 +109,7 @@ test('given a LiveData when it is used with map then a new LiveData will be retu
   const original = new L(true)
 
   // When
-  const mapped = original.map(v => v === true ? 'yes' : 'no')
+  const mapped = map(original, v => v === true ? 'yes' : 'no')
 
   // Then
   t.is(mapped.get(), 'yes')
@@ -119,7 +120,7 @@ test('given a mapped LiveData when it is not active changes to the source will n
   const original = new L(true)
 
   // When
-  const mapped = original.map(v => v === true ? 'yes' : 'no')
+  const mapped = map(original, v => v === true ? 'yes' : 'no')
   original.set('false') // ⚠️ This will not be picked up by the mapped one since it's not active
 
   // Then
@@ -133,7 +134,7 @@ test('given a mapped LiveData when it is subscribed to then original one should 
 
   // Given
   const original = new L(true, originalOnActive, originalOnInactive)
-  const mapped = original.map(v => v)
+  const mapped = map(original, v => v)
 
   // When
   const unsubMapped = mapped.subscribe(mappedObserver)
@@ -152,7 +153,7 @@ test('given a trigger LiveData when switched then the result LiveData should be 
   const switchB = new L('no')
 
   // When
-  const switched = trigger.switchMap(v => {
+  const switched = switchMap(trigger, v => {
     return v === true ? switchA : switchB
   })
 
@@ -175,7 +176,7 @@ test('given a switched LiveData when subscribed to it and ubsubscribed from it t
   const trigger = new L(true)
   const switchA = new L('yes', spiesA.onActive, spiesA.onInactive)
   const switchB = new L('no', spiesB.onActive, spiesB.onInactive)
-  const switched = trigger.switchMap(v => {
+  const switched = switchMap(trigger, v => {
     return v === true ? switchA : switchB
   })
 
@@ -198,7 +199,7 @@ test('given a switched LiveData when the transformation returns the same result 
   // Given
   const trigger = new L(true)
   const result = new L('yes', resultOnActive, resultOnInactive)
-  const switched = trigger.switchMap(() => result) // ⚠️ Always return same result LiveData
+  const switched = switchMap(trigger, () => result) // ⚠️ Always return same result LiveData
 
   // When
   const unsubscribe = switched.subscribe(switchedObserver)
