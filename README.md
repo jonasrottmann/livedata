@@ -84,7 +84,7 @@ const keyboardLiveData = new LiveData(
 
 ## Derivations
 
-The following methods allow to derive a new `LiveData` from an existing `LiveData`.
+The following methods allow you to derive a new `LiveData` from an existing `LiveData`.
 
 > ⚠️ The new `LiveData` must be active (have at least one observer) to pick up changes from the source.
 
