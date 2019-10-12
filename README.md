@@ -6,7 +6,7 @@
     <p>✨ Simple, zero dependency, observable value container. ✨</p>
 </div>
 
-`LiveData` is a very small observable value container targeted at small apps. The goal ist to make observing app state as easy as possible.
+`LiveData` is a very small observable value container targeted at small apps. The goal is to make observing app state as easy as possible.
 
 ## 🧰 Install
 
@@ -42,9 +42,9 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 
 ## 👩‍💻 Usage
 
-**For a simple counter example check out [counter.html](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.
+**For a simple counter example check out [`counter.html`](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.
 
-> 🚧 This documentation is work in prograss...
+> 🚧 This documentation is work in progress...
 
 ```javascript
 import {LiveData} from '@jonasrottmann/livedata'
@@ -67,7 +67,7 @@ livedata.set(true)
 unsubscribe()
 ```
 
-`LiveData` aditionally can receive two callbacks `onActive` and `onInactive`, which will be called when the first observer is added or the last one removed. This can be useful for adding/removing event listeners to modify the `LiveData`s value.
+`LiveData` additionally can receive two callbacks `onActive` and `onInactive`, which will be called when the first observer is added or the last one removed. This can be useful for adding/removing event listeners to modify the `LiveData`s value.
 
 ```javascript
 const listener = e => keyboardLiveData.set(e)
@@ -82,11 +82,23 @@ const keyboardLiveData = new LiveData(
 
 `keyboardLiveData` will start listening to keyboard presses as soon as the first observer calls `subscribe` and will stop when the last observer has been removed.
 
+## Derivations
+
+The following methods allow you to derive a new `LiveData` from an existing `LiveData`.
+
+> ⚠️ The new `LiveData` must be active (have at least one observer) to pick up changes from the source.
+
+### Filter
+
+#### `filter`
+
+Produce a new `LiveData`, which only emits values which fulfil the given predicate.
+
+#### `distinct`
+
+Produce a new `LiveData`, which only emits if the value changed compared to the last emitted value.
+
 ### Transformations
-
-`map` and `switchMap` allow to derive a new `LiveData` from an existing `LiveData`.
-
-> ⚠️ In both cases the derived `LiveData` must be active (have at least one observer) to pick up changes from the source.
 
 #### `map`
 
@@ -94,7 +106,7 @@ const keyboardLiveData = new LiveData(
 
 ```javascript
 const source = new LiveData(true)
-const mapped = source.map(v => v ? '✅' : '🛑')
+const mapped = map(source, v => v ? '✅' : '🛑')
 
 mapped.subsribe(v => console.log(v))
 
@@ -105,21 +117,21 @@ Will print `✅` followed by `🛑`.
 
 #### `switchMap`
 
-`switchMap` is used to react to changes to the trigger `LiveData` and returns a new `LiveData` which emits values from whatever `LiveData` the transfomer function returns.
+`switchMap` is used to react to changes to the trigger `LiveData` and returns a new `LiveData` which emits values from whatever `LiveData` the transformer function returns.
 
 ```javascript
 const trigger = new LiveData(true)
 const switchA = new LiveData('🅰️')
 const switchB = new LiveData('🅱️')
 
-const switched = trigger.switchMap(v => v ? switchA : switchB)
+const switched = switchMap(trigger, v => v ? switchA : switchB)
 
 switched.subscribe(v => console.log(v))
 ```
 
 `switched` will now emit the values emitted by `switchA` if `trigger` contains `true` and the values emitted by `switchB` if `trigger` contains `false`.
 
-### `MediatorLiveData`
+## Mediator
 
 `MediatorLiveData` is a subclass of `LiveData` which allows to listen to multiple source `LiveData`s and react to value changes.
 
