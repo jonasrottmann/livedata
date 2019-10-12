@@ -92,11 +92,11 @@ The following methods allow you to derive a new `LiveData` from an existing `Liv
 
 #### `filter`
 
-TODO: Document `filter`
+Produce a new `LiveData`, which only emits values which fulfill the given predicate.
 
 #### `distinct`
 
-TODO: Document `distinct`
+Produce a new `LiveData`, which only emits if the value changed compared to the last emitted value.
 
 ### Transformations
 
