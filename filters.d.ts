@@ -13,4 +13,4 @@ export declare function filter<T>(liveData: LiveData<T>, predicate: (value: T) =
  * @param comparator Defaults to strict equality comparison (===).
  * @returns A new LiveData.
  */
-export declare function distinct<T>(liveData: LiveData<T>, comparator: (a: T, b: T) => Boolean): LiveData<T>;
+export declare function distinct<T>(liveData: LiveData<T>, comparator?: (a: T, b: T) => Boolean): LiveData<T>;
