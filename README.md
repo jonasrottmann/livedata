@@ -6,7 +6,7 @@
     <p>✨ Simple, zero dependency, observable value container. ✨</p>
 </div>
 
-`LiveData` is a very small observable value container targeted at small apps. The goal ist to make observing app state as easy as possible.
+`LiveData` is a very small observable value container targeted at small apps. The goal is to make observing app state as easy as possible.
 
 ## 🧰 Install
 
@@ -42,9 +42,9 @@ Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.
 
 ## 👩‍💻 Usage
 
-**For a simple counter example check out [counter.html](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.
+**For a simple counter example check out [`counter.html`](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.
 
-> 🚧 This documentation is work in prograss...
+> 🚧 This documentation is work in progress...
 
 ```javascript
 import {LiveData} from '@jonasrottmann/livedata'
@@ -67,7 +67,7 @@ livedata.set(true)
 unsubscribe()
 ```
 
-`LiveData` aditionally can receive two callbacks `onActive` and `onInactive`, which will be called when the first observer is added or the last one removed. This can be useful for adding/removing event listeners to modify the `LiveData`s value.
+`LiveData` additionally can receive two callbacks `onActive` and `onInactive`, which will be called when the first observer is added or the last one removed. This can be useful for adding/removing event listeners to modify the `LiveData`s value.
 
 ```javascript
 const listener = e => keyboardLiveData.set(e)
@@ -92,7 +92,7 @@ The following methods allow you to derive a new `LiveData` from an existing `Liv
 
 #### `filter`
 
-Produce a new `LiveData`, which only emits values which fulfill the given predicate.
+Produce a new `LiveData`, which only emits values which fulfil the given predicate.
 
 #### `distinct`
 
@@ -117,7 +117,7 @@ Will print `✅` followed by `🛑`.
 
 #### `switchMap`
 
-`switchMap` is used to react to changes to the trigger `LiveData` and returns a new `LiveData` which emits values from whatever `LiveData` the transfomer function returns.
+`switchMap` is used to react to changes to the trigger `LiveData` and returns a new `LiveData` which emits values from whatever `LiveData` the transformer function returns.
 
 ```javascript
 const trigger = new LiveData(true)
