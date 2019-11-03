@@ -11,7 +11,7 @@
     "*.d.ts"
   ],
   "scripts": {
-    "docs": "rm -rf docs/; typedoc --theme markdown --mode file --readme none --includeDeclarations --excludeExternals --out ./docs/ ./*.d.ts; cp README.md docs/INTRO.md; concat-md docs > README.md",
+    "docs": "rm -rf docs/; typedoc --theme markdown --mode file --readme none --includeDeclarations --excludeExternals --out ./docs/ ./*.d.ts;",
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup -c",
