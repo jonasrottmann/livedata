@@ -11,6 +11,7 @@
     "*.d.ts"
   ],
   "scripts": {
+    "docs": "rm -rf docs/; typedoc --theme markdown --mode file --readme none --includeDeclarations --excludeExternals --out ./docs/ ./*.d.ts; cp README.md docs/INTRO.md; concat-md docs > README.md",
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup -c",
@@ -36,6 +37,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/register": "^7.6.2",
     "ava": "^2.4.0",
+    "concat-md": "^0.3.2",
     "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
     "rollup": "^1.26.3",
@@ -44,6 +46,8 @@
     "rollup-plugin-terser": "^5.1.2",
     "sinon": "^7.5.0",
     "tsd": "^0.10.0",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-markdown": "^2.2.11",
     "xo": "^0.25.3"
   },
   "keywords": [
