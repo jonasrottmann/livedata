@@ -58,7 +58,7 @@ const remove = mediatorLiveData.addSource(liveData, value => {
 
 *Inherited from [LiveData](livedata.md).[constructor](livedata.md#constructor)*
 
-*Defined in [livedata.d.ts:1](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L1)*
+*Defined in [livedata.d.ts:1](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L1)*
 
 **Parameters:**
 
@@ -84,7 +84,7 @@ A handler which is called whenever the number of observers changes from 1 to 0.
 
 ▸ **addSource**<**S**>(`liveData`: [LiveData](livedata.md)‹S›, `onChange`: function): *function*
 
-*Defined in [livedata.d.ts:71](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L71)*
+*Defined in [livedata.d.ts:71](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L71)*
 
 Starts to listen the given source LiveData, onChange observer will be called when source value was changed.
 
@@ -124,7 +124,7 @@ ___
 
 *Inherited from [LiveData](livedata.md).[get](livedata.md#get)*
 
-*Defined in [livedata.d.ts:14](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L14)*
+*Defined in [livedata.d.ts:14](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L14)*
 
 Access the current value of this LiveData.
 
@@ -140,7 +140,7 @@ ___
 
 *Inherited from [LiveData](livedata.md).[isActive](livedata.md#isactive)*
 
-*Defined in [livedata.d.ts:25](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L25)*
+*Defined in [livedata.d.ts:25](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L25)*
 
 **Returns:** *boolean*
 
@@ -154,7 +154,7 @@ ___
 
 *Inherited from [LiveData](livedata.md).[set](livedata.md#set)*
 
-*Defined in [livedata.d.ts:20](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L20)*
+*Defined in [livedata.d.ts:20](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L20)*
 
 **Parameters:**
 
@@ -174,7 +174,7 @@ ___
 
 *Inherited from [LiveData](livedata.md).[subscribe](livedata.md#subscribe)*
 
-*Defined in [livedata.d.ts:36](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L36)*
+*Defined in [livedata.d.ts:36](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L36)*
 
 **Parameters:**
 
@@ -205,7 +205,7 @@ ___
 
 *Inherited from [LiveData](livedata.md).[transition](livedata.md#transition)*
 
-*Defined in [livedata.d.ts:30](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L30)*
+*Defined in [livedata.d.ts:30](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L30)*
 
 **Parameters:**
 

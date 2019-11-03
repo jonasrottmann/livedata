@@ -32,7 +32,7 @@
 
 \+ **new LiveData**(`initialValue?`: T, `onActive?`: function, `onInactive?`: function): *[LiveData](livedata.md)*
 
-*Defined in [livedata.d.ts:1](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L1)*
+*Defined in [livedata.d.ts:1](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L1)*
 
 **Parameters:**
 
@@ -58,7 +58,7 @@ A handler which is called whenever the number of observers changes from 1 to 0.
 
 ▸ **get**(): *T*
 
-*Defined in [livedata.d.ts:14](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L14)*
+*Defined in [livedata.d.ts:14](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L14)*
 
 Access the current value of this LiveData.
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **isActive**(): *boolean*
 
-*Defined in [livedata.d.ts:25](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L25)*
+*Defined in [livedata.d.ts:25](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L25)*
 
 **Returns:** *boolean*
 
@@ -84,7 +84,7 @@ ___
 
 ▸ **set**(`value`: T): *T*
 
-*Defined in [livedata.d.ts:20](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L20)*
+*Defined in [livedata.d.ts:20](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L20)*
 
 **Parameters:**
 
@@ -102,7 +102,7 @@ ___
 
 ▸ **subscribe**(`observer`: function): *function*
 
-*Defined in [livedata.d.ts:36](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L36)*
+*Defined in [livedata.d.ts:36](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L36)*
 
 **Parameters:**
 
@@ -131,7 +131,7 @@ ___
 
 ▸ **transition**(`action`: function): *void*
 
-*Defined in [livedata.d.ts:30](https://github.com/jonasrottmann/livedata/blob/ec75819/livedata.d.ts#L30)*
+*Defined in [livedata.d.ts:30](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L30)*
 
 **Parameters:**
 
