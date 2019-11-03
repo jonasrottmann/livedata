@@ -43,7 +43,7 @@
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "sinon": "^7.5.0",
-    "tsd": "^0.9.0",
+    "tsd": "^0.10.0",
     "xo": "^0.25.3"
   },
   "keywords": [
