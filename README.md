@@ -82,9 +82,9 @@ const keyboardLiveData = new LiveData(
 
 `keyboardLiveData` will start listening to keyboard presses as soon as the first observer calls `subscribe` and will stop when the last observer has been removed.
 
-## API
+## ℹ️ API
 
-See [docs](/docs/README.md).
+The full API documentation can be found in [./docs/](/docs/README.md).
 
 ## 👨‍⚖️ License
 
