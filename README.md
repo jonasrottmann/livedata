@@ -82,89 +82,9 @@ const keyboardLiveData = new LiveData(
 
 `keyboardLiveData` will start listening to keyboard presses as soon as the first observer calls `subscribe` and will stop when the last observer has been removed.
 
-## Derivations
+## ℹ️ API
 
-The following methods allow you to derive a new `LiveData` from an existing `LiveData`.
-
-> ⚠️ The new `LiveData` must be active (have at least one observer) to pick up changes from the source.
-
-### Filter
-
-#### `filter`
-
-Produce a new `LiveData`, which only emits values which fulfil the given predicate.
-
-#### `distinct`
-
-Produce a new `LiveData`, which only emits if the value changed compared to the last emitted value.
-
-### Transformations
-
-#### `map`
-
-`map` is used to apply the given transformer function to each value emitted by the source `LiveData` and returns a new `LiveData` which emits those resulting values.
-
-```javascript
-const source = new LiveData(true)
-const mapped = map(source, v => v ? '✅' : '🛑')
-
-mapped.subsribe(v => console.log(v))
-
-source.set(false)
-```
-
-Will print `✅` followed by `🛑`.
-
-#### `switchMap`
-
-`switchMap` is used to react to changes to the trigger `LiveData` and returns a new `LiveData` which emits values from whatever `LiveData` the transformer function returns.
-
-```javascript
-const trigger = new LiveData(true)
-const switchA = new LiveData('🅰️')
-const switchB = new LiveData('🅱️')
-
-const switched = switchMap(trigger, v => v ? switchA : switchB)
-
-switched.subscribe(v => console.log(v))
-```
-
-`switched` will now emit the values emitted by `switchA` if `trigger` contains `true` and the values emitted by `switchB` if `trigger` contains `false`.
-
-## Mediator
-
-`MediatorLiveData` is a subclass of `LiveData` which allows to listen to multiple source `LiveData`s and react to value changes.
-
-For example we can combine two `LiveData`s (`liveDataA` and `liveDataB`) in a `MediatorLiveData` by adding them as sources. Whenever `liveDataA` or `liveDataB` emits a new value, `mediator` will be updated.
-
-```javascript
-import {LiveData, MediatorLiveData} from '@jonasrottmann/livedata'
-
-const liveDataA = new LiveData('🅰️')
-const liveDataB = new LiveData('🅱️')
-
-const mediator = new MediatorLiveData();
-
-mediator.addSource(liveDataA, value => {
-    mediator.set(value)
-});
-mediator.addSource(liveDataB, value => {
-    mediator.set(value)
-});
-```
-
-In this example we only want 10 values emitted by the source `LiveData` to be picked up by `mediatorLiveData`. After 10 values we stop listening to the source `LiveData` and remove it as a source of `mediatorLiveData`.
-
-```javascript
-let counter = 0
-const remove = mediatorLiveData.addSource(liveData, value => {
-    counter++
-    mediatorLiveData.set(value)
-    if (counter >= 10) {
-        remove()
-    }
-})
-```
+The full API documentation can be found in [./docs/](/docs/README.md).
 
 ## 👨‍⚖️ License
 
