@@ -1,4 +1,3 @@
-[@jonasrottmann/livedata](README.md)
 
 # @jonasrottmann/livedata
 
@@ -22,8 +21,6 @@
 ###  distinct
 
 ▸ **distinct**<**T**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `comparator?`: function): *[LiveData](classes/livedata.md)‹T›*
-
-*Defined in [filters.d.ts:19](https://github.com/jonasrottmann/livedata/blob/master/filters.d.ts#L19)*
 
 Produce a new `LiveData`, which only emits if the value changed compared to the last emitted value.
 
@@ -60,8 +57,6 @@ ___
 
 ▸ **filter**<**T**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `predicate`: function): *[LiveData](classes/livedata.md)‹T›*
 
-*Defined in [filters.d.ts:10](https://github.com/jonasrottmann/livedata/blob/master/filters.d.ts#L10)*
-
 Produce a new `LiveData`, which only emits values which fulfil the given predicate.
 
 **Type parameters:**
@@ -95,8 +90,6 @@ ___
 ###  map
 
 ▸ **map**<**T**, **S**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `transformer`: function): *[LiveData](classes/livedata.md)‹S›*
-
-*Defined in [transformations.d.ts:20](https://github.com/jonasrottmann/livedata/blob/master/transformations.d.ts#L20)*
 
 Builds a new LiveData whose value gets updated (during it's active) whenever the source changes.
 
@@ -144,8 +137,6 @@ ___
 
 ▸ **merge**<**T**>(`livedatas`: Array‹[LiveData](classes/livedata.md)‹T››): *[LiveData](classes/livedata.md)‹T›*
 
-*Defined in [combine.d.ts:3](https://github.com/jonasrottmann/livedata/blob/master/combine.d.ts#L3)*
-
 **Type parameters:**
 
 ▪ **T**
@@ -163,8 +154,6 @@ ___
 ###  switchMap
 
 ▸ **switchMap**<**T**, **S**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `transformer`: function): *[LiveData](classes/livedata.md)‹S›*
-
-*Defined in [transformations.d.ts:40](https://github.com/jonasrottmann/livedata/blob/master/transformations.d.ts#L40)*
 
 Builds a new LiveData whose value gets updated (during it's active) whenever the tigger changes or the LiveData result of the transformation updates.
 

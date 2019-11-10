@@ -11,11 +11,12 @@
     "*.d.ts"
   ],
   "scripts": {
-    "docs": "rm -rf docs/; typedoc --theme markdown --mode file --readme none --gitRevision master --includeDeclarations --excludeExternals --out ./docs/ ./*.d.ts;",
+    "predoc": "rm -rf ./docs/",
+    "doc": "typedoc --theme markdown --hideSources --hideBreadcrumbs --mode file --readme none --gitRevision master --includeDeclarations --excludeExternals --out ./docs/ ./*.d.ts;",
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup -c",
-    "postbuild": "npm run docs",
+    "postbuild": "npm run doc",
     "test": "run-p test-*",
     "test-unit": "nyc ava",
     "test-lint": "xo",

@@ -1,4 +1,3 @@
-[@jonasrottmann/livedata](../README.md) › [MediatorLiveData](mediatorlivedata.md)
 
 # Class: MediatorLiveData <**T**>
 
@@ -58,8 +57,6 @@ const remove = mediatorLiveData.addSource(liveData, value => {
 
 *Inherited from [LiveData](livedata.md).[constructor](livedata.md#constructor)*
 
-*Defined in [livedata.d.ts:1](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L1)*
-
 **Parameters:**
 
 ▪`Optional`  **initialValue**: *T*
@@ -83,8 +80,6 @@ A handler which is called whenever the number of observers changes from 1 to 0.
 ###  addSource
 
 ▸ **addSource**<**S**>(`liveData`: [LiveData](livedata.md)‹S›, `onChange`: function): *function*
-
-*Defined in [livedata.d.ts:71](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L71)*
 
 Starts to listen the given source LiveData, onChange observer will be called when source value was changed.
 
@@ -124,8 +119,6 @@ ___
 
 *Inherited from [LiveData](livedata.md).[get](livedata.md#get)*
 
-*Defined in [livedata.d.ts:14](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L14)*
-
 Access the current value of this LiveData.
 
 **Returns:** *T*
@@ -140,8 +133,6 @@ ___
 
 *Inherited from [LiveData](livedata.md).[isActive](livedata.md#isactive)*
 
-*Defined in [livedata.d.ts:25](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L25)*
-
 **Returns:** *boolean*
 
 `true` if there are observers.
@@ -153,8 +144,6 @@ ___
 ▸ **set**(`value`: T): *T*
 
 *Inherited from [LiveData](livedata.md).[set](livedata.md#set)*
-
-*Defined in [livedata.d.ts:20](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L20)*
 
 **Parameters:**
 
@@ -173,8 +162,6 @@ ___
 ▸ **subscribe**(`observer`: function): *function*
 
 *Inherited from [LiveData](livedata.md).[subscribe](livedata.md#subscribe)*
-
-*Defined in [livedata.d.ts:36](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L36)*
 
 **Parameters:**
 
@@ -204,8 +191,6 @@ ___
 ▸ **transition**(`action`: function): *void*
 
 *Inherited from [LiveData](livedata.md).[transition](livedata.md#transition)*
-
-*Defined in [livedata.d.ts:30](https://github.com/jonasrottmann/livedata/blob/master/livedata.d.ts#L30)*
 
 **Parameters:**
 
