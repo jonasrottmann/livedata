@@ -1,9 +1,12 @@
+**[@jonasrottmann/livedata](../README.md)**
 
-# Class: LiveData <**T**>
+# Class: LiveData\<T>
 
 ## Type parameters
 
-▪ **T**
+Name |
+------ |
+`T` |
 
 ## Hierarchy
 
@@ -27,111 +30,84 @@
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new LiveData**(`initialValue?`: T, `onActive?`: function, `onInactive?`: function): *[LiveData](livedata.md)*
+\+ **new LiveData**(`initialValue?`: T, `onActive?`: () => void, `onInactive?`: () => void): [LiveData](livedata.md)
 
-**Parameters:**
+#### Parameters:
 
-▪`Optional`  **initialValue**: *T*
+Name | Type | Description |
+------ | ------ | ------ |
+`initialValue?` | T |  |
+`onActive?` | () => void | A handler which is called whenever the number of observers changes from 0 to 1. |
+`onInactive?` | () => void | A handler which is called whenever the number of observers changes from 1 to 0.  |
 
-▪`Optional`  **onActive**: *function*
-
-A handler which is called whenever the number of observers changes from 0 to 1.
-
-▸ (): *void*
-
-▪`Optional`  **onInactive**: *function*
-
-A handler which is called whenever the number of observers changes from 1 to 0.
-
-▸ (): *void*
-
-**Returns:** *[LiveData](livedata.md)*
+**Returns:** [LiveData](livedata.md)
 
 ## Methods
 
-###  get
+### get
 
-▸ **get**(): *T*
+▸ **get**(): T
 
 Access the current value of this LiveData.
 
-**Returns:** *T*
+**Returns:** T
 
 The current value.
 
 ___
 
-###  isActive
+### isActive
 
-▸ **isActive**(): *boolean*
+▸ **isActive**(): boolean
 
-**Returns:** *boolean*
+**Returns:** boolean
 
 `true` if there are observers.
 
 ___
 
-###  set
+### set
 
-▸ **set**(`value`: T): *T*
+▸ **set**(`value`: T): T
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `value` | T | The value to set. |
 
-**Returns:** *T*
+**Returns:** T
 
 The just set value.
 
 ___
 
-###  subscribe
+### subscribe
 
-▸ **subscribe**(`observer`: function): *function*
+▸ **subscribe**(`observer`: (newValue: T, oldValue?: T) => void): function
 
-**Parameters:**
+#### Parameters:
 
-▪ **observer**: *function*
+Name | Type | Description |
+------ | ------ | ------ |
+`observer` | (newValue: T, oldValue?: T) => void | The callback to be invoked whenever the value changes. |
 
-The callback to be invoked whenever the value changes.
-
-▸ (`newValue`: T, `oldValue?`: T): *void*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`newValue` | T |
-`oldValue?` | T |
-
-**Returns:** *function*
+**Returns:** function
 
 A handle to unsubscribe this observer.
 
-▸ (): *void*
-
 ___
 
-###  transition
+### transition
 
-▸ **transition**(`action`: function): *void*
+▸ **transition**(`action`: (value: T) => T): void
 
-**Parameters:**
+#### Parameters:
 
-▪ **action**: *function*
+Name | Type | Description |
+------ | ------ | ------ |
+`action` | (value: T) => T | A function which receives the current state and produces the new one.  |
 
-A function which receives the current state and produces the new one.
-
-▸ (`value`: T): *T*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`value` | T |
-
-**Returns:** *void*
+**Returns:** void

@@ -1,3 +1,4 @@
+**[@jonasrottmann/livedata](README.md)**
 
 # @jonasrottmann/livedata
 
@@ -18,78 +19,59 @@
 
 ## Functions
 
-###  distinct
+### distinct
 
-▸ **distinct**<**T**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `comparator?`: function): *[LiveData](classes/livedata.md)‹T›*
+▸ **distinct**\<T>(`liveData`: [LiveData](classes/livedata.md)\<T>, `comparator?`: (a: T, b: T) => Boolean): [LiveData](classes/livedata.md)\<T>
 
 Produce a new `LiveData`, which only emits if the value changed compared to the last emitted value.
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
-▪ **liveData**: *[LiveData](classes/livedata.md)‹T›*
+Name | Type | Description |
+------ | ------ | ------ |
+`liveData` | [LiveData](classes/livedata.md)\<T> | The LiveData to be filtered. |
+`comparator?` | (a: T, b: T) => Boolean | Defaults to strict equality comparison (===). |
 
-The LiveData to be filtered.
-
-▪`Optional`  **comparator**: *function*
-
-Defaults to strict equality comparison (===).
-
-▸ (`a`: T, `b`: T): *Boolean*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`a` | T |
-`b` | T |
-
-**Returns:** *[LiveData](classes/livedata.md)‹T›*
+**Returns:** [LiveData](classes/livedata.md)\<T>
 
 A new LiveData.
 
 ___
 
-###  filter
+### filter
 
-▸ **filter**<**T**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `predicate`: function): *[LiveData](classes/livedata.md)‹T›*
+▸ **filter**\<T>(`liveData`: [LiveData](classes/livedata.md)\<T>, `predicate`: (value: T) => Boolean): [LiveData](classes/livedata.md)\<T>
 
 Produce a new `LiveData`, which only emits values which fulfil the given predicate.
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
-▪ **liveData**: *[LiveData](classes/livedata.md)‹T›*
+Name | Type | Description |
+------ | ------ | ------ |
+`liveData` | [LiveData](classes/livedata.md)\<T> | The LiveData to be filtered. |
+`predicate` | (value: T) => Boolean | Decides wether the value is allowed (returns true if value is allowed). |
 
-The LiveData to be filtered.
-
-▪ **predicate**: *function*
-
-Decides wether the value is allowed (returns true if value is allowed).
-
-▸ (`value`: T): *Boolean*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`value` | T |
-
-**Returns:** *[LiveData](classes/livedata.md)‹T›*
+**Returns:** [LiveData](classes/livedata.md)\<T>
 
 A new LiveData.
 
 ___
 
-###  map
+### map
 
-▸ **map**<**T**, **S**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `transformer`: function): *[LiveData](classes/livedata.md)‹S›*
+▸ **map**\<T, S>(`liveData`: [LiveData](classes/livedata.md)\<T>, `transformer`: (value: T) => S): [LiveData](classes/livedata.md)\<S>
 
 Builds a new LiveData whose value gets updated (during it's active) whenever the source changes.
 
@@ -103,57 +85,49 @@ mapped.subsribe(v => console.log(v))
 source.set(false)
 ```
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
+`S` |
 
-▪ **S**
+#### Parameters:
 
-**Parameters:**
+Name | Type | Description |
+------ | ------ | ------ |
+`liveData` | [LiveData](classes/livedata.md)\<T> | The source LiveData. |
+`transformer` | (value: T) => S | A mapping to apply to values of the source. |
 
-▪ **liveData**: *[LiveData](classes/livedata.md)‹T›*
-
-The source LiveData.
-
-▪ **transformer**: *function*
-
-A mapping to apply to values of the source.
-
-▸ (`value`: T): *S*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`value` | T |
-
-**Returns:** *[LiveData](classes/livedata.md)‹S›*
+**Returns:** [LiveData](classes/livedata.md)\<S>
 
 A new LiveData.
 
 ___
 
-###  merge
+### merge
 
-▸ **merge**<**T**>(`livedatas`: Array‹[LiveData](classes/livedata.md)‹T››): *[LiveData](classes/livedata.md)‹T›*
+▸ **merge**\<T>(`livedatas`: Array\<[LiveData](classes/livedata.md)\<T>>): [LiveData](classes/livedata.md)\<T>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`livedatas` | Array‹[LiveData](classes/livedata.md)‹T›› |
+`livedatas` | Array\<[LiveData](classes/livedata.md)\<T>> |
 
-**Returns:** *[LiveData](classes/livedata.md)‹T›*
+**Returns:** [LiveData](classes/livedata.md)\<T>
 
 ___
 
-###  switchMap
+### switchMap
 
-▸ **switchMap**<**T**, **S**>(`liveData`: [LiveData](classes/livedata.md)‹T›, `transformer`: function): *[LiveData](classes/livedata.md)‹S›*
+▸ **switchMap**\<T, S>(`liveData`: [LiveData](classes/livedata.md)\<T>, `transformer`: (value: T) => [LiveData](classes/livedata.md)\<S>): [LiveData](classes/livedata.md)\<S>
 
 Builds a new LiveData whose value gets updated (during it's active) whenever the tigger changes or the LiveData result of the transformation updates.
 
@@ -168,30 +142,20 @@ const switched = switchMap(trigger, v => v ? switchA : switchB)
 switched.subscribe(v => console.log(v))
 ```
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
+`S` |
 
-▪ **S**
+#### Parameters:
 
-**Parameters:**
+Name | Type | Description |
+------ | ------ | ------ |
+`liveData` | [LiveData](classes/livedata.md)\<T> | The trigger LiveData. |
+`transformer` | (value: T) => [LiveData](classes/livedata.md)\<S> | A mapping for switching to another LiveData depending on the value of the trigger. |
 
-▪ **liveData**: *[LiveData](classes/livedata.md)‹T›*
-
-The trigger LiveData.
-
-▪ **transformer**: *function*
-
-A mapping for switching to another LiveData depending on the value of the trigger.
-
-▸ (`value`: T): *[LiveData](classes/livedata.md)‹S›*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`value` | T |
-
-**Returns:** *[LiveData](classes/livedata.md)‹S›*
+**Returns:** [LiveData](classes/livedata.md)\<S>
 
 A new LiveData.

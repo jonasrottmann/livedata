@@ -3,7 +3,7 @@ import {terser} from 'rollup-plugin-terser'
 import bundleSize from 'rollup-plugin-bundle-size'
 import pkg from './package.json'
 
-export default [
+const config = [
   {
     input: 'index.js',
     output: {file: pkg.unpkg, format: 'iife', name: 'livedata', sourcemap: true},
@@ -28,3 +28,5 @@ export default [
     ]
   }
 ]
+
+export default config
