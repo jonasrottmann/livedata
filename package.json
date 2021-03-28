@@ -1,9 +1,9 @@
 {
   "name": "@jonasrottmann/livedata",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "✨ Simple, zero dependency, observable value container. ✨",
   "type": "module",
-  "exports": "./dist.livedata.js",
+  "exports": "./dist/livedata.js",
   "files": [
     "dist",
     "*.d.ts"
