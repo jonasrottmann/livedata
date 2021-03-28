@@ -9,12 +9,9 @@
     "*.d.ts"
   ],
   "scripts": {
-    "predoc": "rm -rf ./docs/",
-    "doc": "typedoc --theme markdown --hideSources --hideBreadcrumbs --mode file --readme none --gitRevision master --includeDeclarations --excludeExternals --out ./docs/ ./*.d.ts;",
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "esbuild index.js --bundle --minify --sourcemap --format=esm --outfile=dist/livedata.js",
-    "postbuild": "npm run doc",
     "test": "run-s test-*",
     "test-unit": "nyc ava",
     "test-typings": "tsd"
@@ -37,10 +34,8 @@
     "npm-run-all": "^4.1.5",
     "nyc": "^15.1.0",
     "sinon": "^9.2.1",
-    "tsd": "^0.13.1",
-    "typedoc": "^0.19.2",
-    "typedoc-plugin-markdown": "^3.0.11",
-    "typescript": "^4.0.5"
+    "tsd": "^0.14.0",
+    "typescript": "^4.2.3"
   },
   "keywords": [
     "data flow",
