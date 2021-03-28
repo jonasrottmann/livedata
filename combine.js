@@ -1,4 +1,4 @@
-import {MediatorLiveData} from './livedata'
+import {MediatorLiveData} from './livedata.js'
 
 export function merge(livedatas) {
   const merged = new MediatorLiveData()

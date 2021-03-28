@@ -1,4 +1,4 @@
-import {MediatorLiveData} from './livedata'
+import {MediatorLiveData} from './livedata.js'
 
 export function filter(livedata, predicate) {
   const value = livedata.get()

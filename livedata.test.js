@@ -1,6 +1,6 @@
 import test from 'ava'
 import sinon from 'sinon'
-import {LiveData as L, MediatorLiveData as M} from './livedata'
+import {LiveData as L, MediatorLiveData as M} from './livedata.js'
 
 test('given a LiveData with initial value then get will return it', t => {
   // Given

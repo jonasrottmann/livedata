@@ -18,28 +18,6 @@ npm install @jonasrottmann/livedata
 yarn add @jonasrottmann/livedata
 ```
 
-Use directly with [unpkg](https://unpkg.com/) as a **minified [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)**:
-
-```html
-<script src="https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata.min.js" charset="utf-8"></script>
-
-<script>
-    const hello = new livedata.LiveData('👋')
-    ...
-</script>
-```
-
-Use directly with [unpkg](https://unpkg.com/) as a **[module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)**:
-
-```html
-<script type=module>
-    import {LiveData} from 'https://unpkg.com/@jonasrottmann/livedata@<VERSION>/dist/livedata-module.js'
-
-    const hello = new LiveData('👋')
-    ...
-</script>
-```
-
 ## 👩‍💻 Usage
 
 **For a simple counter example check out [`counter.html`](examples/counter.html) or explore on [CodePen](https://codepen.io/jonasrottmann/pen/WNeMPEv)**.

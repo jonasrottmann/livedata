@@ -1,7 +1,7 @@
 import test from 'ava'
 import sinon from 'sinon'
-import {LiveData as L} from './livedata'
-import {merge} from './combine'
+import {LiveData as L} from './livedata.js'
+import {merge} from './combine.js'
 
 test('given multiple livedatas when each one emits then the merged will also emit each value', t => {
   const spy = sinon.spy()

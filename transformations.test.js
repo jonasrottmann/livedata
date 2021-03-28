@@ -1,7 +1,7 @@
 import test from 'ava'
 import sinon from 'sinon'
-import {LiveData as L} from './livedata'
-import {map, switchMap} from './transformations'
+import {LiveData as L} from './livedata.js'
+import {map, switchMap} from './transformations.js'
 
 test('given a LiveData when it is used with map then a new LiveData will be returned with the mapped value', t => {
   // Given
