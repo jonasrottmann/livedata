@@ -8,24 +8,25 @@
 <head>
     <title>Counter example</title>
     <meta charset="utf-8">
-    <script src="https://unpkg.com/@jonasrottmann/livedata@0.0.9/dist/livedata.min.js">
-    <script>
-        const counter = new livedata.LiveData(0)
+    <script type="module">
+        import { LiveData } from 'https://unpkg.com/@jonasrottmann/livedata@0.0.11/dist/livedata.js'
+        const counter = new LiveData(0)
+        counter.subscribe((v, o) => {
+            console.log(`Counter value changed from ${o} to ${v}!`)
 
-        window.onload = () => {
-            counter.subscribe((v, o) => {
-                console.log(`Counter value changed from ${o} to ${v}!`)
-                document.querySelector('#value').textContent = v
-            })
-        }
+            document.querySelector('#value').textContent = v
+        })
+        window.decrease = () => counter.transition(value => value > 0 ? value - 1 : 0)
+        window.increase = () => counter.transition(value => value + 1)
+        window.reset = () => counter.set(0)
     </script>
 </head>
 
 <body>
-    <button onclick="counter.transition(value => value > 0 ? value - 1 : 0)">-</button>
+    <button onclick="decrease()">-</button>
     <span id="value">0</span>
-    <button onclick="counter.transition(value => value + 1)">+</button>
-    <button onclick="counter.set(0)">reset</button>
+    <button onclick="increase()">+</button>
+    <button onclick="reset()">reset</button>
 </body>
 
 </html>
