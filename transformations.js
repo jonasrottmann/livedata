@@ -1,4 +1,4 @@
-import {LiveData} from './livedata'
+import {LiveData} from './livedata.js'
 
 export function map(livedata, transformer) {
   let unsubscribe

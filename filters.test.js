@@ -1,7 +1,7 @@
 import test from 'ava'
 import sinon from 'sinon'
-import {LiveData as L} from './livedata'
-import {filter, distinct} from './filters'
+import {LiveData as L} from './livedata.js'
+import {filter, distinct} from './filters.js'
 
 test('given a LiveData when filtered LiveData is derived and source value does pass predicate then filtered LiveData should be initialized with it', t => {
   // Given
