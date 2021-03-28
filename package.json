@@ -1,6 +1,6 @@
 {
   "name": "@jonasrottmann/livedata",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "✨ Simple, zero dependency, observable value container. ✨",
   "type": "module",
   "exports": "./index.js",
