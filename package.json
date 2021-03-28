@@ -2,16 +2,23 @@
   "name": "@jonasrottmann/livedata",
   "version": "0.0.11",
   "description": "✨ Simple, zero dependency, observable value container. ✨",
+  "author": {
+		"name": "Jonas Rottmann",
+		"url": "https://jonas.codes"
+	},
   "type": "module",
+  "engines": {
+		"node": ">=12"
+	},
   "exports": "./dist/livedata.js",
   "files": [
-    "dist",
+    "dist/livedata.js",
     "*.d.ts"
   ],
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "esbuild index.js --bundle --minify --sourcemap --format=esm --outfile=dist/livedata.js",
+    "build": "esbuild index.js --bundle --format=esm --outfile=dist/livedata.js",
     "test": "run-s test-*",
     "test-unit": "nyc ava",
     "test-typings": "tsd"
@@ -21,7 +28,6 @@
     "type": "git",
     "url": "git+https://github.com/jonasrottmann/livedata.git"
   },
-  "author": "Jonas Rottmann",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jonasrottmann/livedata/issues"
