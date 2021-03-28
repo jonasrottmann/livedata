@@ -3,7 +3,7 @@
   "version": "0.0.10",
   "description": "✨ Simple, zero dependency, observable value container. ✨",
   "type": "module",
-  "exports": "./index.js",
+  "exports": "./dist.livedata.js",
   "files": [
     "dist",
     "*.d.ts"
